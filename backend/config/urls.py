@@ -8,23 +8,17 @@ TokenRefreshView,
 )
 
 urlpatterns = [
-# ============================================================
-# DJANGO ADMIN
-# ============================================================
-# Django's built-in admin dashboard
-# Frontend admin remains available at /admin
+# Django Admin
 path("django-admin/", admin.site.urls),
 
 ```
-# ============================================================
-# AUTHENTICATION
-# ============================================================
+# Authentication
 path(
     "api/v1/auth/",
     include("accounts.urls"),
 ),
 
-# JWT Authentication
+# JWT
 path(
     "api/v1/auth/token/",
     TokenObtainPairView.as_view(),
@@ -37,9 +31,7 @@ path(
     name="token_refresh",
 ),
 
-# ============================================================
-# MARKETPLACE APIs
-# ============================================================
+# Marketplace APIs
 path(
     "api/v1/categories/",
     include("categories.urls"),
@@ -102,14 +94,6 @@ path(
 ```
 
 ]
-
-# ============================================================
-
-# MEDIA FILES
-
-# ============================================================
-
-# Serve uploaded media files during development.
 
 if settings.DEBUG:
 urlpatterns += static(
