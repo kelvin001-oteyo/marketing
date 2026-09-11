@@ -8,17 +8,14 @@ TokenRefreshView,
 )
 
 urlpatterns = [
-# Django Admin
 path("django-admin/", admin.site.urls),
 
 ```
-# Authentication
 path(
     "api/v1/auth/",
     include("accounts.urls"),
 ),
 
-# JWT
 path(
     "api/v1/auth/token/",
     TokenObtainPairView.as_view(),
@@ -31,7 +28,6 @@ path(
     name="token_refresh",
 ),
 
-# Marketplace APIs
 path(
     "api/v1/categories/",
     include("categories.urls"),
