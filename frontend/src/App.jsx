@@ -1,6 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-// Customer Pages
+// ============================================================
+// CUSTOMER PAGES
+// ============================================================
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
@@ -17,8 +19,13 @@ import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
 import Profile from "./pages/Profile";
 import Addresses from "./pages/Addresses";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Contact from "./pages/Contact";
 
-// Seller Pages
+// ============================================================
+// SELLER PAGES
+// ============================================================
 import SellerApplication from "./pages/SellerApplication";
 import SellerDashboard from "./pages/SellerDashboard";
 import SellerProducts from "./pages/SellerProducts";
@@ -29,8 +36,11 @@ import SellerInventory from "./pages/SellerInventory";
 import SellerOrders from "./pages/SellerOrders";
 import SellerStore from "./pages/SellerStore";
 
-// Admin Pages
+// ============================================================
+// ADMIN PAGES
+// ============================================================
 import AdminLayout from "./layouts/AdminLayout";
+
 import Dashboard from "./pages/admin/Dashboard";
 import ProductsAdmin from "./pages/admin/Products";
 import AddProduct from "./pages/admin/AddProduct";
@@ -46,9 +56,10 @@ import ReviewsAdmin from "./pages/admin/Reviews";
 import NotificationsAdmin from "./pages/admin/Notifications";
 import ReportsAdmin from "./pages/admin/Reports";
 import SettingsAdmin from "./pages/admin/Settings";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Contact from "./pages/Contact";
+
+// ============================================================
+// ROUTE GUARDS
+// ============================================================
 import AdminRoute from "./routes/AdminRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -58,155 +69,370 @@ function App() {
         <BrowserRouter>
             <Routes>
 
-                {/* =====================================================
-                    CUSTOMER MARKETPLACE
-                ====================================================== */}
+                {/* ========================================================
+                    PUBLIC CUSTOMER MARKETPLACE
+                ========================================================= */}
 
                 <Route path="/" element={<Home />} />
 
                 <Route path="/login" element={<Login />} />
+
                 <Route path="/register" element={<Register />} />
+
                 <Route path="/contact" element={<Contact />} />
 
-                <Route path="/products" element={<Products />} />
-                <Route path="/products/:id" element={<ProductDetails />} />
+                <Route
+                    path="/products"
+                    element={<Products />}
+                />
 
-                <Route path="/categories" element={<Categories />} />
+                <Route
+                    path="/products/:id"
+                    element={<ProductDetails />}
+                />
+
+                <Route
+                    path="/categories"
+                    element={<Categories />}
+                />
+
                 <Route
                     path="/categories/:slug"
                     element={<CategoryProducts />}
                 />
 
-                <Route path="/stores" element={<Stores />} />
+                <Route
+                    path="/stores"
+                    element={<Stores />}
+                />
+
                 <Route
                     path="/stores/:slug"
                     element={<StoreDetails />}
                 />
 
-                <Route path="/search" element={<Search />} />
+                <Route
+                    path="/search"
+                    element={<Search />}
+                />
+
+
+                {/* ========================================================
+                    AUTHENTICATED CUSTOMER AREA
+                ========================================================= */}
 
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/wishlist" element={<Wishlist />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/orders/success" element={<OrderSuccess />} />
-                    <Route path="/orders" element={<Orders />} />
-                    <Route path="/orders/:id" element={<OrderDetails />} />
-                    <Route path="/profile" element={<Profile />} />
-                    <Route path="/addresses" element={<Addresses />} />
-                    <Route path="/sell" element={<SellerApplication />} />
+
+                    <Route
+                        path="/cart"
+                        element={<Cart />}
+                    />
+
+                    <Route
+                        path="/wishlist"
+                        element={<Wishlist />}
+                    />
+
+                    <Route
+                        path="/checkout"
+                        element={<Checkout />}
+                    />
+
+                    <Route
+                        path="/orders/success"
+                        element={<OrderSuccess />}
+                    />
+
+                    <Route
+                        path="/orders"
+                        element={<Orders />}
+                    />
+
+                    <Route
+                        path="/orders/:id"
+                        element={<OrderDetails />}
+                    />
+
+                    <Route
+                        path="/profile"
+                        element={<Profile />}
+                    />
+
+                    <Route
+                        path="/addresses"
+                        element={<Addresses />}
+                    />
+
+                    <Route
+                        path="/sell"
+                        element={<SellerApplication />}
+                    />
+
                 </Route>
 
 
-                {/* =====================================================
-                    SELLER MARKETPLACE
-                ====================================================== */}
+                {/* ========================================================
+                    SELLER DASHBOARD
+                ========================================================= */}
 
-                <Route element={<ProtectedRoute allowedRoles={["SELLER"]} />}>
-                    <Route path="/sell/dashboard" element={<SellerDashboard />} />
-                    <Route path="/seller/dashboard" element={<Navigate to="/sell/dashboard" replace />} />
-                    <Route path="/seller" element={<Navigate to="/sell/dashboard" replace />} />
-                    <Route path="/seller/products" element={<SellerProducts />} />
-                    <Route path="/seller/products/new" element={<SellerAddProduct />} />
-                    <Route path="/seller/products/:id/edit" element={<SellerEditProduct />} />
-                    <Route path="/seller/products/:id/variants" element={<SellerProductVariants />} />
-                    <Route path="/seller/inventory" element={<SellerInventory />} />
-                    <Route path="/seller/orders" element={<SellerOrders />} />
-                    <Route path="/seller/store" element={<SellerStore />} />
+                <Route
+                    element={
+                        <ProtectedRoute allowedRoles={["SELLER"]} />
+                    }
+                >
+
+                    {/* Main seller dashboard */}
+
+                    <Route
+                        path="/sell/dashboard"
+                        element={<SellerDashboard />}
+                    />
+
+                    {/* Alternative seller dashboard URLs */}
+
+                    <Route
+                        path="/seller"
+                        element={
+                            <Navigate
+                                to="/sell/dashboard"
+                                replace
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/seller/dashboard"
+                        element={
+                            <Navigate
+                                to="/sell/dashboard"
+                                replace
+                            />
+                        }
+                    />
+
+
+                    {/* Seller products */}
+
+                    <Route
+                        path="/seller/products"
+                        element={<SellerProducts />}
+                    />
+
+                    <Route
+                        path="/seller/products/new"
+                        element={<SellerAddProduct />}
+                    />
+
+                    <Route
+                        path="/seller/products/:id/edit"
+                        element={<SellerEditProduct />}
+                    />
+
+                    <Route
+                        path="/seller/products/:id/variants"
+                        element={<SellerProductVariants />}
+                    />
+
+
+                    {/* Seller inventory */}
+
+                    <Route
+                        path="/seller/inventory"
+                        element={<SellerInventory />}
+                    />
+
+
+                    {/* Seller orders */}
+
+                    <Route
+                        path="/seller/orders"
+                        element={<SellerOrders />}
+                    />
+
+
+                    {/* Seller store */}
+
+                    <Route
+                        path="/seller/store"
+                        element={<SellerStore />}
+                    />
+
                 </Route>
 
 
-                {/* =====================================================
+                {/* ========================================================
                     ADMIN DASHBOARD
-                ====================================================== */}
+                =========================================================
+                    
+                    IMPORTANT:
+                    Every /admin/* page is protected by AdminRoute.
+                    
+                    Example:
+                    /admin
+                    /admin/products
+                    /admin/orders
+                    /admin/sellers
+                    etc.
+                ========================================================= */}
 
                 <Route element={<AdminRoute />}>
-                <Route path="/admin" element={<AdminLayout />}>
-                    <Route
-                        index
-                        element={<Dashboard />}
-                    />
 
                     <Route
-                        path="products"
-                        element={<ProductsAdmin />}
-                    />
+                        path="/admin"
+                        element={<AdminLayout />}
+                    >
 
-                    <Route
-                        path="products/add"
-                        element={<AddProduct />}
-                    />
+                        {/* ------------------------------------------------
+                            ADMIN DASHBOARD
+                        ------------------------------------------------- */}
 
-                    <Route
-                        path="products/:id/edit"
-                        element={<EditProduct />}
-                    />
+                        <Route
+                            index
+                            element={<Dashboard />}
+                        />
 
-                    <Route
-                        path="products/:id/variants"
-                        element={<ProductVariants />}
-                    />
 
-                    <Route
-                        path="inventory"
-                        element={<InventoryAdmin />}
-                    />
+                        {/* ------------------------------------------------
+                            PRODUCTS
+                        ------------------------------------------------- */}
 
-                    <Route
-                        path="categories"
-                        element={<CategoriesAdmin />}
-                    />
+                        <Route
+                            path="products"
+                            element={<ProductsAdmin />}
+                        />
 
-                    <Route
-                        path="sellers"
-                        element={<SellersAdmin />}
-                    />
+                        <Route
+                            path="products/add"
+                            element={<AddProduct />}
+                        />
 
-                    <Route
-                        path="customers"
-                        element={<CustomersAdmin />}
-                    />
+                        <Route
+                            path="products/:id/edit"
+                            element={<EditProduct />}
+                        />
 
-                    <Route
-                        path="orders"
-                        element={<OrdersAdmin />}
-                    />
+                        <Route
+                            path="products/:id/variants"
+                            element={<ProductVariants />}
+                        />
 
-                    <Route
-                        path="promotions"
-                        element={<PromotionsAdmin />}
-                    />
 
-                    <Route
-                        path="reviews"
-                        element={<ReviewsAdmin />}
-                    />
+                        {/* ------------------------------------------------
+                            INVENTORY
+                        ------------------------------------------------- */}
 
-                    <Route
-                        path="notifications"
-                        element={<NotificationsAdmin />}
-                    />
+                        <Route
+                            path="inventory"
+                            element={<InventoryAdmin />}
+                        />
 
-                    <Route
-                        path="reports"
-                        element={<ReportsAdmin />}
-                    />
 
-                    <Route
-                        path="settings"
-                        element={<SettingsAdmin />}
-                    />
+                        {/* ------------------------------------------------
+                            CATEGORIES
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="categories"
+                            element={<CategoriesAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            SELLERS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="sellers"
+                            element={<SellersAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            CUSTOMERS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="customers"
+                            element={<CustomersAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            ORDERS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="orders"
+                            element={<OrdersAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            PROMOTIONS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="promotions"
+                            element={<PromotionsAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            REVIEWS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="reviews"
+                            element={<ReviewsAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            NOTIFICATIONS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="notifications"
+                            element={<NotificationsAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            REPORTS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="reports"
+                            element={<ReportsAdmin />}
+                        />
+
+
+                        {/* ------------------------------------------------
+                            STORE SETTINGS
+                        ------------------------------------------------- */}
+
+                        <Route
+                            path="settings"
+                            element={<SettingsAdmin />}
+                        />
+
+                    </Route>
+
                 </Route>
-                </Route>
 
 
-                {/* =====================================================
+                {/* ========================================================
                     FALLBACK
-                ====================================================== */}
+                ========================================================= */}
 
                 <Route
                     path="*"
-                    element={<Navigate to="/" replace />}
+                    element={
+                        <Navigate
+                            to="/"
+                            replace
+                        />
+                    }
                 />
 
             </Routes>
