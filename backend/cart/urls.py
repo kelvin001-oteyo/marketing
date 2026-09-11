@@ -5,6 +5,7 @@ from .views import (
     AddToCartView,
     UpdateCartItemView,
     RemoveCartItemView,
+    ClearCartView,
     MergeGuestCartView,
 )
 
@@ -21,6 +22,11 @@ urlpatterns = [
         "items/<int:item_id>/remove/",
         RemoveCartItemView.as_view(),
         name="cart-remove",
+    ),
+    path(
+        "clear/",
+        ClearCartView.as_view(),
+        name="cart-clear",
     ),
     path(
         "merge/",
