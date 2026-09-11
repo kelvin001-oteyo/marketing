@@ -1,7 +1,273 @@
 
 
 
+/* ============================================================
+   HOMEPAGE UPGRADE
+============================================================ */
 
+.marketplace-trust-strip {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 24px 6%;
+    background: #ffffff;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.trust-icon {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.trust-item strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.trust-item span {
+    display: block;
+    font-size: 12px;
+    color: #777777;
+}
+
+
+/* ============================================================
+   HERO PRODUCT IMAGES
+============================================================ */
+
+.hero-fashion-card {
+    overflow: hidden;
+}
+
+.hero-fashion-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-fashion-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hero-card-one {
+    position: relative;
+}
+
+.hero-card-one > span {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 3;
+    padding: 7px 11px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.hero-floating-card small {
+    display: block;
+    margin-top: 7px;
+    color: #777777;
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   PRODUCT BADGES
+============================================================ */
+
+.product-image {
+    position: relative;
+}
+
+.product-sale,
+.product-new {
+    position: absolute;
+    top: 12px;
+    z-index: 5;
+    padding: 6px 9px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+.product-sale {
+    left: 12px;
+    background: #111111;
+    color: #ffffff;
+}
+
+.product-new {
+    right: 12px;
+    background: #ffffff;
+    color: #111111;
+    border: 1px solid #dddddd;
+}
+
+
+/* ============================================================
+   DEALS
+============================================================ */
+
+.marketplace-deals-section {
+    background: #fafafa;
+    padding-top: 55px;
+    padding-bottom: 55px;
+}
+
+
+/* ============================================================
+   M-PESA HOMEPAGE SECTION
+============================================================ */
+
+.mpesa-home-section {
+    width: 88%;
+    max-width: 1240px;
+    margin: 70px auto;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: #f5f5f5;
+    border-radius: 18px;
+}
+
+.mpesa-home-content {
+    max-width: 680px;
+}
+
+.mpesa-home-content h2 {
+    margin: 8px 0 14px;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #111111;
+}
+
+.mpesa-home-content p {
+    max-width: 600px;
+    margin: 0 0 25px;
+    color: #666666;
+    line-height: 1.7;
+}
+
+.mpesa-home-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 22px;
+    background: #111111;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.mpesa-home-button:hover {
+    opacity: 0.88;
+}
+
+.mpesa-home-card {
+    width: 280px;
+    min-width: 280px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+}
+
+.mpesa-badge {
+    display: inline-flex;
+    padding: 7px 12px;
+    margin-bottom: 22px;
+    background: #111111;
+    color: #ffffff;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.mpesa-home-card strong {
+    display: block;
+    font-size: 19px;
+    margin-bottom: 9px;
+}
+
+.mpesa-home-card span {
+    display: block;
+    color: #777777;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   RESPONSIVE HOMEPAGE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .marketplace-trust-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mpesa-home-section {
+        width: 90%;
+        padding: 35px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .marketplace-trust-strip {
+        grid-template-columns: 1fr;
+        padding: 22px 5%;
+    }
+
+    .mpesa-home-section {
+        width: 90%;
+        margin: 45px auto;
+        padding: 28px 22px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mpesa-home-content h2 {
+        font-size: 28px;
+    }
+
+    .mpesa-home-card {
+        width: auto;
+        min-width: 0;
+    }
+
+}
 
 /* =========================================================
    CHECKOUT + M-PESA
