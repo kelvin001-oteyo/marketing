@@ -9019,6 +9019,69 @@
         grid-template-columns: 1fr;
     }
 
+
+    /* Hero — visual polish */
+
+.marketplace-hero {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef1f6 55%, #f8fafc 100%);
+    border-radius: 24px;
+}
+
+.hero-primary-btn,
+.hero-secondary-btn {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(23, 32, 51, 0.25);
+}
+
+.hero-secondary-btn:hover {
+    transform: translateY(-2px);
+    border-color: #172033;
+}
+
+.hero-trust {
+    padding-top: 22px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.hero-trust div:not(:last-child) {
+    padding-right: 38px;
+    border-right: 1px solid #e5e7eb;
+}
+
+.fashion-placeholder {
+    background: linear-gradient(135deg, #172033 0%, #334155 100%);
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.hero-fashion-card {
+    transition: transform 0.25s ease;
+}
+
+.hero-fashion-card:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+}
+
+.hero-floating-card {
+    animation: heroFloatIn 0.6s ease both;
+}
+
+@keyframes heroFloatIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     .marketplace-footer-grid {
         grid-template-columns: 1fr;
     }
