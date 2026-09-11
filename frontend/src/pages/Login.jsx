@@ -31,6 +31,9 @@ export default function Login() {
                 headers: { Authorization: `Bearer ${access}` },
             });
 
+            // TEMPORARY DEBUG — remove after checking the role value
+            alert(JSON.stringify(userResponse.data, null, 2));
+
             login(access, refresh, userResponse.data);
 
             const destination = location.state?.from?.pathname ||
