@@ -296,21 +296,18 @@ function Home() {
             <header className="marketplace-header">
                 <div className="marketplace-header-inner">
 
-                    <Link
-                        to="/"
-                        className="marketplace-logo"
-                    >
-                        <span className="marketplace-logo-mark">
-                            CM
-                        </span>
+                    <Link to="/" className="marketplace-logo">
+    <span className="marketplace-logo-mark">
+        NF
+    </span>
+    <span>
+        Nila
+        <strong>
+            Fashion
+        </strong>
+    </span>
+</Link>
 
-                        <span>
-                            Clothing
-                            <strong>
-                                Marketplace
-                            </strong>
-                        </span>
-                    </Link>
 
                     <form
                         className="marketplace-search"
