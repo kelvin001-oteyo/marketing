@@ -1,5 +1,530 @@
 
+/* =========================================================
+   NILA FASHION — PROFILE PAGE (add-on)
+   Safe: uses new class names only.
+========================================================= */
 
+.nf-profile-main {
+    padding: 32px 28px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.nf-profile-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: #0f172a;
+    color: #ffffff;
+    isolation: isolate;
+    margin-bottom: 32px;
+}
+
+.nf-profile-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+        linear-gradient(120deg, #172033 0%, #1f2a44 55%, #0f172a 100%);
+    z-index: -1;
+}
+
+.nf-profile-hero.is-guest .nf-profile-hero-bg {
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 55%),
+        linear-gradient(120deg, #172033 0%, #334155 100%);
+}
+
+.nf-profile-hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 40px 44px;
+}
+
+.nf-profile-avatar {
+    width: 92px;
+    height: 92px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.nf-profile-hero-text {
+    min-width: 0;
+}
+
+.nf-profile-eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+}
+
+.nf-profile-hero-text h1 {
+    margin: 0 0 8px;
+    color: #ffffff;
+    font-size: 30px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.nf-profile-hero-text > p {
+    max-width: 620px;
+    margin: 0 0 18px;
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.nf-profile-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nf-role-badge,
+.nf-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.nf-role-badge svg { color: #7ee2a8; }
+
+.nf-role-admin {
+    background: rgba(126, 226, 168, 0.16);
+    color: #d1fae5;
+}
+.nf-role-admin svg { color: #d1fae5; }
+
+.nf-meta-badge {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+.nf-profile-hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.nf-profile-hero .marketplace-primary-btn {
+    background: #ffffff;
+    color: #172033;
+    border-color: #ffffff;
+}
+.nf-profile-hero .marketplace-primary-btn:hover {
+    background: #e2e8f0;
+    border-color: #e2e8f0;
+}
+
+.nf-profile-hero .marketplace-secondary-btn {
+    background: transparent;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.nf-profile-hero .marketplace-secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.nf-profile-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.nf-profile-sidebar {
+    position: sticky;
+    top: 20px;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+
+.nf-profile-sidebar-title {
+    margin: 0 0 14px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.nf-profile-sidebar-nav {
+    display: grid;
+    gap: 4px;
+}
+
+.nf-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nf-sidebar-link:hover {
+    background: #f1f5f9;
+}
+
+.nf-sidebar-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f1f5f9;
+    color: #172033;
+}
+
+.nf-sidebar-link > span:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.nf-sidebar-link strong {
+    color: #172033;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.nf-sidebar-link small {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.nf-sidebar-signout {
+    width: 100%;
+    margin-top: 16px;
+    padding: 11px 14px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #b91c1c;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+.nf-sidebar-signout:hover {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+/* =========================================================
+   CONTENT — quick actions
+========================================================= */
+
+.nf-profile-content {
+    min-width: 0;
+}
+
+.nf-profile-section-heading {
+    margin-bottom: 18px;
+}
+.nf-profile-section-heading h2 {
+    margin: 0 0 5px;
+    color: #172033;
+    font-size: 20px;
+}
+.nf-profile-section-heading p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.nf-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.nf-quick-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.nf-quick-card:hover {
+    transform: translateY(-3px);
+    border-color: #cbd5e1;
+    box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+.nf-quick-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f1f5f9;
+    color: #172033;
+    margin-bottom: 6px;
+}
+
+.nf-quick-card strong {
+    color: #172033;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.nf-quick-card small {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.nf-quick-arrow {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: #94a3b8;
+    font-size: 16px;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+.nf-quick-card:hover .nf-quick-arrow {
+    color: #172033;
+    transform: translateX(3px);
+}
+
+.nf-quick-admin {
+    background: linear-gradient(135deg, #172033 0%, #334155 100%);
+    border-color: #172033;
+}
+.nf-quick-admin .nf-quick-icon {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+.nf-quick-admin strong { color: #ffffff; }
+.nf-quick-admin small { color: #cbd5e1; }
+.nf-quick-admin .nf-quick-arrow { color: #cbd5e1; }
+.nf-quick-admin:hover {
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25);
+}
+.nf-quick-admin:hover .nf-quick-arrow { color: #ffffff; }
+
+/* =========================================================
+   NOTE CARD
+========================================================= */
+
+.nf-profile-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 22px;
+    padding: 18px 20px;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    background: #eff6ff;
+    color: #1e3a8a;
+}
+.nf-profile-note svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: #2563eb;
+}
+.nf-profile-note strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+.nf-profile-note p {
+    margin: 0;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   GUEST STATE
+========================================================= */
+
+.nf-profile-guest {
+    padding: 34px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+}
+.nf-profile-guest h2 {
+    margin: 0 0 8px;
+    color: #172033;
+    font-size: 22px;
+}
+.nf-profile-guest > p {
+    margin: 0 0 20px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 520px;
+}
+
+.nf-guest-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+    display: grid;
+    gap: 10px;
+}
+.nf-guest-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+.nf-guest-benefits li span {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #047857;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.nf-profile-guest-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .nf-profile-layout {
+        grid-template-columns: 1fr;
+    }
+    .nf-profile-sidebar {
+        position: static;
+    }
+    .nf-quick-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .nf-profile-hero-inner {
+        padding: 32px 28px;
+    }
+    .nf-profile-hero-text h1 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nf-profile-main {
+        padding: 20px 16px 60px;
+    }
+    .nf-profile-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 22px;
+        gap: 18px;
+    }
+    .nf-profile-avatar {
+        width: 72px;
+        height: 72px;
+        font-size: 24px;
+    }
+    .nf-profile-hero-text h1 {
+        font-size: 22px;
+    }
+    .nf-quick-grid {
+        grid-template-columns: 1fr;
+    }
+    .nf-profile-guest {
+        padding: 22px;
+    }
+    .nf-profile-hero-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    .nf-profile-hero-actions a {
+        width: 100%;
+        text-align: center;
+    }
+    .nf-sidebar-link {
+        padding: 10px;
+    }
+}
+
+/* Focus rings */
+.nf-profile-main a:focus-visible,
+.nf-profile-main button:focus-visible {
+    outline: 2px solid #172033;
+    outline-offset: 2px;
+}
+
+/* Reuse the utility from the homepage add-on if not already present */
+.nf-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 
 /* =========================================================
    NILA FASHION — AUTH PAGE REDESIGN (add-on)
