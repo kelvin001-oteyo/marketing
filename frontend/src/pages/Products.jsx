@@ -423,26 +423,33 @@ function Products() {
                 </div>
             </nav>
 
-            <main className="products-page nf-products-page">
+            {/* ================= HERO BAND ================= */}
+            <section className="nf-products-hero" aria-labelledby="nf-products-title">
+                <div className="nf-products-hero-bg" aria-hidden="true" />
+                <div className="nf-products-hero-overlay" aria-hidden="true" />
 
-                {/* ---- Page heading ---- */}
-                <header className="nf-products-heading">
-                    <div>
-                        <span className="section-eyebrow">MARKETPLACE</span>
-                        <h1>Discover products</h1>
+                <div className="nf-products-hero-inner">
+                    <div className="nf-products-hero-text">
+                        <span className="nf-products-hero-eyebrow">
+                            MARKETPLACE
+                        </span>
+                        <h1 id="nf-products-title">Discover products</h1>
                         <p>
                             Explore clothing and fashion products from
                             marketplace sellers.
                         </p>
                     </div>
 
-                    <div className="nf-products-count" aria-live="polite">
+                    <div className="nf-products-hero-count" aria-live="polite">
                         <strong>{filteredProducts.length}</strong>
                         <span>
                             product{filteredProducts.length === 1 ? "" : "s"}
                         </span>
                     </div>
-                </header>
+                </div>
+            </section>
+
+            <main className="products-page nf-products-page">
 
                 {/* ---- Mobile filter toggle ---- */}
                 <button
