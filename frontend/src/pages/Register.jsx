@@ -181,65 +181,71 @@ export default function Register() {
     };
 
     return (
-        <main className="auth-page nf-auth-page">
-            <section className="auth-card nf-auth-card" aria-labelledby="register-title">
+        <main className="nf-auth-page">
+            <section className="nf-auth-card nf-auth-card-wide" aria-labelledby="register-title">
 
                 {/* ---------- Left: form ---------- */}
-                <div className="nf-auth-form-col nf-register-col">
+                <div className="nf-auth-form-col nf-auth-form-col-register">
 
-                    <Link className="auth-brand" to="/" aria-label="Nila Fashion home">
+                    <Link className="nf-auth-brand" to="/" aria-label="Nila Fashion home">
                         <span className="nf-auth-logo-mark">NF</span>
-                        <span>Nila<strong>Fashion</strong></span>
+                        <span className="nf-auth-wordmark">
+                            Nila<em>Fashion</em>
+                        </span>
                     </Link>
 
-                    <p className="auth-eyebrow">CREATE YOUR ACCOUNT</p>
-                    <h1 id="register-title">Start shopping today</h1>
-                    <p className="auth-intro">
-                        Create an account to save items, place orders, and apply
-                        as a seller.
-                    </p>
+                    <header className="nf-auth-head">
+                        <span className="nf-auth-eyebrow">CREATE YOUR ACCOUNT</span>
+                        <h1 id="register-title">Start shopping today</h1>
+                        <p className="nf-auth-sub">
+                            Create an account to save items, place orders, and
+                            apply as a seller.
+                        </p>
+                    </header>
 
                     {error && (
-                        <div className="auth-alert" role="alert">
+                        <div className="nf-auth-alert" role="alert">
                             {error}
                         </div>
                     )}
 
-                    <form className="auth-form" onSubmit={handleSubmit} noValidate>
+                    <form className="nf-auth-form" onSubmit={handleSubmit} noValidate>
 
                         {/* -------- Personal -------- */}
-                        <fieldset className="nf-fieldset">
+                        <fieldset className="nf-auth-fieldset">
                             <legend>Personal details</legend>
 
-                            <div className="nf-form-grid">
-                                <label htmlFor="first_name">
-                                    First name
+                            <div className="nf-auth-grid">
+                                <label className="nf-auth-field" htmlFor="first_name">
+                                    <span className="nf-auth-label">First name</span>
                                     <input
                                         id="first_name"
                                         name="first_name"
                                         autoComplete="given-name"
                                         value={form.first_name}
                                         onChange={handleChange}
+                                        placeholder="Jane"
                                         required
                                         disabled={loading}
                                     />
                                 </label>
 
-                                <label htmlFor="last_name">
-                                    Last name
+                                <label className="nf-auth-field" htmlFor="last_name">
+                                    <span className="nf-auth-label">Last name</span>
                                     <input
                                         id="last_name"
                                         name="last_name"
                                         autoComplete="family-name"
                                         value={form.last_name}
                                         onChange={handleChange}
+                                        placeholder="Doe"
                                         required
                                         disabled={loading}
                                     />
                                 </label>
 
-                                <label htmlFor="email">
-                                    Email
+                                <label className="nf-auth-field" htmlFor="email">
+                                    <span className="nf-auth-label">Email</span>
                                     <input
                                         id="email"
                                         name="email"
@@ -247,20 +253,21 @@ export default function Register() {
                                         autoComplete="email"
                                         value={form.email}
                                         onChange={handleChange}
+                                        placeholder="you@example.com"
                                         required
                                         disabled={loading}
                                     />
                                 </label>
 
-                                <label htmlFor="phone_number">
-                                    Phone number
+                                <label className="nf-auth-field" htmlFor="phone_number">
+                                    <span className="nf-auth-label">Phone number</span>
                                     <input
                                         id="phone_number"
                                         name="phone_number"
                                         type="tel"
                                         inputMode="tel"
                                         autoComplete="tel"
-                                        placeholder="e.g. 0712345678"
+                                        placeholder="0712 345 678"
                                         value={form.phone_number}
                                         onChange={handleChange}
                                         required
@@ -271,17 +278,18 @@ export default function Register() {
                         </fieldset>
 
                         {/* -------- Account -------- */}
-                        <fieldset className="nf-fieldset">
+                        <fieldset className="nf-auth-fieldset">
                             <legend>Account</legend>
 
-                            <label htmlFor="register-username">
-                                Username
+                            <label className="nf-auth-field" htmlFor="register-username">
+                                <span className="nf-auth-label">Username</span>
                                 <input
                                     id="register-username"
                                     name="username"
                                     autoComplete="username"
                                     value={form.username}
                                     onChange={handleChange}
+                                    placeholder="Choose a username"
                                     required
                                     disabled={loading}
                                 />
@@ -289,13 +297,13 @@ export default function Register() {
                         </fieldset>
 
                         {/* -------- Security -------- */}
-                        <fieldset className="nf-fieldset">
+                        <fieldset className="nf-auth-fieldset">
                             <legend>Security</legend>
 
-                            <div className="nf-form-grid">
-                                <label htmlFor="register-password">
-                                    Password
-                                    <div className="nf-password-wrap">
+                            <div className="nf-auth-grid">
+                                <label className="nf-auth-field" htmlFor="register-password">
+                                    <span className="nf-auth-label">Password</span>
+                                    <div className="nf-auth-input-wrap">
                                         <input
                                             id="register-password"
                                             name="password"
@@ -304,12 +312,13 @@ export default function Register() {
                                             minLength="8"
                                             value={form.password}
                                             onChange={handleChange}
+                                            placeholder="At least 8 characters"
                                             required
                                             disabled={loading}
                                         />
                                         <button
                                             type="button"
-                                            className="nf-password-toggle"
+                                            className="nf-auth-toggle"
                                             onClick={() => setShowPassword((v) => !v)}
                                             aria-label={showPassword ? "Hide password" : "Show password"}
                                             aria-pressed={showPassword}
@@ -321,10 +330,10 @@ export default function Register() {
 
                                     {form.password.length > 0 && (
                                         <div
-                                            className={`nf-strength nf-strength-${strength.tone}`}
+                                            className={`nf-auth-strength nf-auth-strength-${strength.tone}`}
                                             aria-live="polite"
                                         >
-                                            <div className="nf-strength-bars" aria-hidden="true">
+                                            <div className="nf-auth-strength-bars" aria-hidden="true">
                                                 <span />
                                                 <span />
                                                 <span />
@@ -336,9 +345,9 @@ export default function Register() {
                                     )}
                                 </label>
 
-                                <label htmlFor="password_confirm">
-                                    Confirm password
-                                    <div className="nf-password-wrap">
+                                <label className="nf-auth-field" htmlFor="password_confirm">
+                                    <span className="nf-auth-label">Confirm password</span>
+                                    <div className="nf-auth-input-wrap">
                                         <input
                                             id="password_confirm"
                                             name="password_confirm"
@@ -347,11 +356,12 @@ export default function Register() {
                                             minLength="8"
                                             value={form.password_confirm}
                                             onChange={handleChange}
+                                            placeholder="Re-enter your password"
                                             required
                                             disabled={loading}
                                             className={
                                                 form.password_confirm.length > 0 && !passwordsMatch
-                                                    ? "nf-input-error"
+                                                    ? "nf-auth-input-error"
                                                     : ""
                                             }
                                             aria-invalid={
@@ -360,7 +370,7 @@ export default function Register() {
                                         />
                                         <button
                                             type="button"
-                                            className="nf-password-toggle"
+                                            className="nf-auth-toggle"
                                             onClick={() => setShowConfirm((v) => !v)}
                                             aria-label={showConfirm ? "Hide password" : "Show password"}
                                             aria-pressed={showConfirm}
@@ -374,8 +384,8 @@ export default function Register() {
                                         <small
                                             className={
                                                 passwordsMatch
-                                                    ? "nf-match-hint is-ok"
-                                                    : "nf-match-hint is-bad"
+                                                    ? "nf-auth-match is-ok"
+                                                    : "nf-auth-match is-bad"
                                             }
                                             role="status"
                                         >
@@ -393,49 +403,52 @@ export default function Register() {
                             disabled={loading}
                             className="nf-auth-submit"
                         >
-                            {loading ? "Creating account..." : "Create account"}
+                            {loading ? "Creating account…" : "Create account"}
                         </button>
 
-                        <p className="nf-terms">
+                        <p className="nf-auth-terms">
                             By creating an account you agree to our{" "}
                             <Link to="/terms">Terms</Link> and{" "}
                             <Link to="/privacy">Privacy Policy</Link>.
                         </p>
                     </form>
 
-                    <p className="auth-footer">
-                        Already have an account? <Link to="/login">Sign in</Link>
+                    <p className="nf-auth-footer">
+                        Already have an account?{" "}
+                        <Link to="/login">Sign in</Link>
                     </p>
 
-                    <div className="nf-auth-trust">
-                        <span><IconShield /> Secure</span>
-                        <span><IconTruck /> Fast delivery</span>
-                        <span><IconTag /> Best prices</span>
-                    </div>
+                    <ul className="nf-auth-trust">
+                        <li><IconShield /> Secure</li>
+                        <li><IconTruck /> Fast delivery</li>
+                        <li><IconTag /> Best prices</li>
+                    </ul>
                 </div>
 
                 {/* ---------- Right: brand panel ---------- */}
-                <aside className="nf-auth-aside nf-register-aside" aria-hidden="true">
+                <aside className="nf-auth-aside nf-auth-aside-register" aria-hidden="true">
                     <div className="nf-auth-aside-bg" />
                     <div className="nf-auth-aside-overlay" />
 
                     <div className="nf-auth-aside-content">
-                        <span className="section-eyebrow">JOIN NILA FASHION</span>
-                        <h2>
+                        <span className="nf-auth-aside-eyebrow">JOIN NILA FASHION</span>
+
+                        <h2 className="nf-auth-aside-title">
                             Your closet,
                             <br />
                             upgraded.
                         </h2>
-                        <p>
+
+                        <p className="nf-auth-aside-text">
                             Join thousands of shoppers discovering fashion from
                             trusted sellers across Kenya.
                         </p>
 
                         <ul className="nf-auth-aside-list">
-                            <li><span>✓</span> Free account, no fees</li>
-                            <li><span>✓</span> Save favourites to your wishlist</li>
-                            <li><span>✓</span> Track every order in real time</li>
-                            <li><span>✓</span> M-Pesa checkout in seconds</li>
+                            <li><span aria-hidden="true">✓</span> Free account, no fees</li>
+                            <li><span aria-hidden="true">✓</span> Save favourites to your wishlist</li>
+                            <li><span aria-hidden="true">✓</span> Track every order in real time</li>
+                            <li><span aria-hidden="true">✓</span> M-Pesa checkout in seconds</li>
                         </ul>
                     </div>
                 </aside>
