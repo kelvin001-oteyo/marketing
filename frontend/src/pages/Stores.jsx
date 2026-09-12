@@ -3,6 +3,57 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 import "../styles/marketplace.css";
 
+/* =========================================================
+   INLINE ICONS
+========================================================= */
+
+const IconSearch = () => (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="M21 21l-4.35-4.35" />
+    </svg>
+);
+
+const IconStore = () => (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M3 9l1.5-5h15L21 9" />
+        <path d="M3 9h18v11H3z" />
+        <path d="M9 20v-6h6v6" />
+    </svg>
+);
+
+const IconPin = () => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+    </svg>
+);
+
+const IconCheck = () => (
+    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5" />
+    </svg>
+);
+
+const IconArrow = () => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M5 12h14" />
+        <path d="M13 5l7 7-7 7" />
+    </svg>
+);
+
+const IconWarning = () => (
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+        <path d="M12 9v4" />
+        <path d="M12 17h.01" />
+    </svg>
+);
+
+/* =========================================================
+   STORES
+========================================================= */
+
 const Stores = () => {
     const [stores, setStores] = useState([]);
     const [search, setSearch] = useState("");
@@ -21,454 +72,402 @@ const Stores = () => {
             const response = await api.get("/sellers/");
             const data = response.data;
 
-            setStores(
-                Array.isArray(data)
-                    ? data
-                    : data.results || []
-            );
+            setStores(Array.isArray(data) ? data : data.results || []);
         } catch (err) {
             console.error("Failed to load stores:", err);
             setError(
-                err.response?.data?.detail ||
-                    "Unable to load stores."
+                err.response?.data?.detail || "Unable to load stores."
             );
         } finally {
             setLoading(false);
         }
     };
 
+    /* ---------- filtering (unchanged) ---------- */
+
     const filteredStores = useMemo(() => {
         const query = search.trim().toLowerCase();
-
-        if (!query) {
-            return stores;
-        }
+        if (!query) return stores;
 
         return stores.filter((store) => {
             return (
-                store.store_name
-                    ?.toLowerCase()
-                    .includes(query) ||
-                store.location
-                    ?.toLowerCase()
-                    .includes(query) ||
-                store.description
-                    ?.toLowerCase()
-                    .includes(query)
+                store.store_name?.toLowerCase().includes(query) ||
+                store.location?.toLowerCase().includes(query) ||
+                store.description?.toLowerCase().includes(query)
             );
         });
     }, [stores, search]);
 
-    const getStoreInitial = (store) => {
-        return (
-            store.store_name?.charAt(0)?.toUpperCase() || "S"
-        );
-    };
+    /* ---------- helpers (unchanged) ---------- */
 
-    const getStoreLogo = (store) => {
-        return (
-            store.logo ||
-            `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                store.store_name || "Store"
-            )}&background=111111&color=ffffff&size=300`
-        );
-    };
+    const getStoreInitial = (store) =>
+        store.store_name?.charAt(0)?.toUpperCase() || "S";
 
-    const getStoreBanner = (store) => {
-        return (
-            store.banner ||
-            "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80"
-        );
-    };
+    const getStoreLogo = (store) =>
+        store.logo ||
+        `https://ui-avatars.com/api/?name=${encodeURIComponent(
+            store.store_name || "Store"
+        )}&background=172033&color=ffffff&size=300`;
+
+    const getStoreBanner = (store) =>
+        store.banner ||
+        "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80";
+
+    const getStoreSlug = (store) =>
+        store.store_slug || store.slug || store.id;
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
 
     if (loading) {
         return (
-            <div className="marketplace-page">
-                <div className="marketplace-container">
-                    <div className="marketplace-loading">
-                        <div className="loading-spinner"></div>
-                        <p>Discovering stores...</p>
+            <div className="marketplace">
+                <Header minimal />
+                <main className="nf-stores-main">
+                    <div className="cart-loading">
+                        <div className="cart-loading-spinner" />
+                        <p>Discovering stores…</p>
                     </div>
-                </div>
+                </main>
             </div>
         );
     }
 
+    /* =========================================================
+       MAIN
+    ========================================================= */
+
     return (
-        <div className="marketplace-page">
-            {/* HEADER */}
-            <header className="marketplace-header">
-                <div className="marketplace-container marketplace-header-inner">
-                    <Link
-                        to="/"
-                        className="marketplace-logo"
-                    >
-                        Kelvoh<span>Market</span>
-                    </Link>
+        <div className="marketplace">
+            <Header />
 
-                    <nav className="marketplace-nav">
-                        <Link to="/">Home</Link>
-                        <Link to="/products">Products</Link>
-                        <Link to="/categories">
-                            Categories
-                        </Link>
-                        <Link
-                            to="/stores"
-                            className="active"
-                        >
-                            Stores
-                        </Link>
-                        <Link to="/sell">Sell</Link>
-                    </nav>
+            {/* ---- Hero ---- */}
+            <section className="nf-stores-hero" aria-labelledby="nf-stores-hero-title">
+                <div className="nf-stores-hero-bg" aria-hidden="true" />
+                <div className="nf-stores-hero-overlay" aria-hidden="true" />
 
-                    <div className="marketplace-actions">
-                        <Link
-                            to="/wishlist"
-                            className="marketplace-action"
-                        >
-                            ♡
-                        </Link>
-
-                        <Link
-                            to="/cart"
-                            className="marketplace-action"
-                        >
-                            🛒
-                        </Link>
-
-                        <Link
-                            to="/login"
-                            className="marketplace-login-button"
-                        >
-                            Sign in
-                        </Link>
-                    </div>
-                </div>
-            </header>
-
-            {/* HERO */}
-            <section className="stores-hero">
-                <div className="marketplace-container">
-                    <div className="stores-hero-content">
-                        <span>MARKETPLACE STORES</span>
-
-                        <h1>
-                            Discover
-                            <br />
-                            great stores
-                        </h1>
-
-                        <p>
-                            Shop from trusted clothing sellers
-                            and discover unique collections
-                            from across Kenya.
-                        </p>
-                    </div>
+                <div className="nf-stores-hero-inner">
+                    <span className="section-eyebrow">MARKETPLACE STORES</span>
+                    <h1 id="nf-stores-hero-title">
+                        Discover <br />
+                        <span>great stores</span>
+                    </h1>
+                    <p>
+                        Shop from trusted clothing sellers and discover
+                        unique collections from across Kenya.
+                    </p>
                 </div>
             </section>
 
-            {/* STORE DIRECTORY */}
-            <main className="marketplace-container stores-page">
-                <div className="stores-toolbar">
+            <main className="nf-stores-main">
+
+                {/* ---- Toolbar ---- */}
+                <header className="nf-stores-toolbar">
                     <div>
+                        <span className="section-eyebrow">DIRECTORY</span>
                         <h2>All stores</h2>
                         <p>
                             {stores.length}{" "}
-                            {stores.length === 1
-                                ? "store"
-                                : "stores"}{" "}
-                            on the marketplace
+                            {stores.length === 1 ? "store" : "stores"} on the
+                            marketplace
                         </p>
                     </div>
 
-                    <div className="stores-search">
-                        <span>⌕</span>
-
+                    <div className="nf-stores-search">
+                        <span className="nf-search-icon" aria-hidden="true">
+                            <IconSearch />
+                        </span>
+                        <label htmlFor="stores-search" className="nf-visually-hidden">
+                            Search stores
+                        </label>
                         <input
-                            type="text"
-                            placeholder="Search stores..."
+                            id="stores-search"
+                            type="search"
+                            placeholder="Search stores by name or location..."
                             value={search}
-                            onChange={(event) =>
-                                setSearch(event.target.value)
-                            }
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                </div>
+                </header>
 
+                {/* ---- Error ---- */}
                 {error && (
-                    <div className="marketplace-error">
-                        <h3>Unable to load stores</h3>
+                    <section className="nf-stores-empty" role="alert">
+                        <div className="nf-empty-icon" aria-hidden="true">
+                            <IconWarning />
+                        </div>
+                        <h2>Unable to load stores</h2>
                         <p>{error}</p>
-
-                        <button
-                            type="button"
-                            className="marketplace-primary-button"
-                            onClick={fetchStores}
-                        >
-                            Try again
-                        </button>
-                    </div>
+                        <div className="nf-empty-actions">
+                            <button
+                                type="button"
+                                className="nf-btn-primary"
+                                onClick={fetchStores}
+                            >
+                                Try again
+                            </button>
+                            <Link to="/products" className="nf-btn-ghost">
+                                Browse Products
+                            </Link>
+                        </div>
+                    </section>
                 )}
 
-                {!error &&
-                    filteredStores.length === 0 && (
-                        <div className="stores-empty">
-                            <div className="stores-empty-icon">
-                                ◇
-                            </div>
-
-                            <h3>
-                                {search
-                                    ? "No stores found"
-                                    : "No stores available yet"}
-                            </h3>
-
-                            <p>
-                                {search
-                                    ? "Try searching for another store or location."
-                                    : "Stores will appear here as sellers join the marketplace."}
-                            </p>
-
-                            {search && (
-                                <button
-                                    type="button"
-                                    className="marketplace-secondary-button"
-                                    onClick={() =>
-                                        setSearch("")
-                                    }
-                                >
-                                    Clear search
-                                </button>
-                            )}
+                {/* ---- Empty ---- */}
+                {!error && filteredStores.length === 0 && (
+                    <section className="nf-stores-empty">
+                        <div className="nf-empty-icon" aria-hidden="true">
+                            <IconStore />
                         </div>
-                    )}
+                        <h2>
+                            {search
+                                ? "No stores found"
+                                : "No stores available yet"}
+                        </h2>
+                        <p>
+                            {search
+                                ? "Try searching for another store or location."
+                                : "Stores will appear here as sellers join the marketplace."}
+                        </p>
+                        {search && (
+                            <button
+                                type="button"
+                                className="nf-btn-ghost"
+                                onClick={() => setSearch("")}
+                            >
+                                Clear search
+                            </button>
+                        )}
+                    </section>
+                )}
 
-                {!error &&
-                    filteredStores.length > 0 && (
-                        <div className="stores-grid">
-                            {filteredStores.map((store) => (
-                                <article
-                                    className="store-card"
-                                    key={store.id}
-                                >
+                {/* ---- Grid ---- */}
+                {!error && filteredStores.length > 0 && (
+                    <section
+                        className="nf-stores-grid"
+                        aria-label="Marketplace stores"
+                    >
+                        {filteredStores.map((store) => {
+                            const slug = getStoreSlug(store);
+                            const name = store.store_name || "Store";
+
+                            return (
+                                <article className="nf-store-card" key={store.id}>
+                                    {/* ---- Banner ---- */}
                                     <Link
-                                        to={`/stores/${
-                                            store.store_slug ||
-                                            store.slug ||
-                                            store.id
-                                        }`}
-                                        className="store-card-banner"
+                                        to={`/stores/${slug}`}
+                                        className="nf-store-banner"
+                                        aria-label={`Visit ${name}`}
                                     >
                                         <img
-                                            src={getStoreBanner(
-                                                store
-                                            )}
-                                            alt={`${store.store_name} banner`}
+                                            src={getStoreBanner(store)}
+                                            alt={`${name} banner`}
+                                            loading="lazy"
                                         />
 
                                         {store.verified && (
-                                            <span className="store-verified-badge">
-                                                ✓ Verified
+                                            <span className="nf-store-verified">
+                                                <IconCheck /> Verified
                                             </span>
                                         )}
                                     </Link>
 
-                                    <div className="store-card-content">
-                                        <div className="store-card-top">
-                                            <div className="store-logo">
+                                    {/* ---- Content ---- */}
+                                    <div className="nf-store-body">
+                                        <header className="nf-store-head">
+                                            <div className="nf-store-logo" aria-hidden="true">
                                                 {store.logo ? (
                                                     <img
-                                                        src={getStoreLogo(
-                                                            store
-                                                        )}
-                                                        alt={
-                                                            store.store_name
-                                                        }
+                                                        src={getStoreLogo(store)}
+                                                        alt={name}
                                                     />
                                                 ) : (
-                                                    <span>
-                                                        {getStoreInitial(
-                                                            store
-                                                        )}
-                                                    </span>
+                                                    <span>{getStoreInitial(store)}</span>
                                                 )}
                                             </div>
 
-                                            <div className="store-card-title">
-                                                <Link
-                                                    to={`/stores/${
-                                                        store.store_slug ||
-                                                        store.slug ||
-                                                        store.id
-                                                    }`}
-                                                >
-                                                    {
-                                                        store.store_name
-                                                    }
+                                            <div className="nf-store-title">
+                                                <Link to={`/stores/${slug}`}>
+                                                    {name}
                                                 </Link>
-
                                                 {store.location && (
                                                     <span>
-                                                        📍{" "}
-                                                        {
-                                                            store.location
-                                                        }
+                                                        <IconPin /> {store.location}
                                                     </span>
                                                 )}
                                             </div>
-                                        </div>
+                                        </header>
 
-                                        <p className="store-card-description">
+                                        <p className="nf-store-desc">
                                             {store.description ||
                                                 "Discover clothing and fashion products from this marketplace seller."}
                                         </p>
 
-                                        <div className="store-card-stats">
+                                        <div className="nf-store-stats">
                                             <div>
                                                 <strong>
-                                                    {Number(
-                                                        store.rating ||
-                                                            0
-                                                    ).toFixed(1)}
+                                                    {Number(store.rating || 0).toFixed(1)}
                                                 </strong>
-
-                                                <span>
-                                                    ★ Rating
-                                                </span>
+                                                <span>Rating</span>
                                             </div>
-
                                             <div>
                                                 <strong>
                                                     {store.product_count ??
                                                         store.products_count ??
                                                         "—"}
                                                 </strong>
-
-                                                <span>
-                                                    Products
-                                                </span>
+                                                <span>Products</span>
                                             </div>
-
                                             <div>
                                                 <strong>
-                                                    {store.verified
-                                                        ? "Yes"
-                                                        : "—"}
+                                                    {store.verified ? "Yes" : "—"}
                                                 </strong>
-
-                                                <span>
-                                                    Verified
-                                                </span>
+                                                <span>Verified</span>
                                             </div>
                                         </div>
 
                                         <Link
-                                            to={`/stores/${
-                                                store.store_slug ||
-                                                store.slug ||
-                                                store.id
-                                            }`}
-                                            className="store-view-button"
+                                            to={`/stores/${slug}`}
+                                            className="nf-store-visit"
                                         >
-                                            Visit store
-                                            <span>→</span>
+                                            Visit store <IconArrow />
                                         </Link>
                                     </div>
                                 </article>
-                            ))}
-                        </div>
-                    )}
+                            );
+                        })}
+                    </section>
+                )}
             </main>
 
-            {/* SELLER CTA */}
-            <section className="stores-seller-cta">
-                <div className="marketplace-container">
-                    <div className="stores-seller-cta-inner">
-                        <div>
-                            <span>
-                                HAVE PRODUCTS TO SELL?
-                            </span>
+            {/* ---- Seller CTA ---- */}
+            <section className="nf-stores-cta" aria-labelledby="nf-stores-cta-title">
+                <div className="nf-stores-cta-bg" aria-hidden="true" />
+                <div className="nf-stores-cta-overlay" aria-hidden="true" />
 
-                            <h2>
-                                Build your store on
-                                KelvohMarket
-                            </h2>
-
-                            <p>
-                                Reach customers, showcase your
-                                products and grow your clothing
-                                business online.
-                            </p>
-                        </div>
-
-                        <Link
-                            to="/sell"
-                            className="stores-cta-button"
-                        >
-                            Become a seller →
-                        </Link>
-                    </div>
-                </div>
-            </section>
-
-            {/* FOOTER */}
-            <footer className="marketplace-footer">
-                <div className="marketplace-container marketplace-footer-grid">
+                <div className="nf-stores-cta-inner">
                     <div>
-                        <Link
-                            to="/"
-                            className="marketplace-logo"
-                        >
-                            Kelvoh<span>Market</span>
-                        </Link>
-
+                        <span className="section-eyebrow">HAVE PRODUCTS TO SELL?</span>
+                        <h2 id="nf-stores-cta-title">
+                            Build your store on Nila Fashion
+                        </h2>
                         <p>
-                            A modern marketplace connecting
-                            customers with trusted clothing
-                            sellers.
+                            Reach customers, showcase your products and grow
+                            your clothing business online.
                         </p>
                     </div>
 
-                    <div>
-                        <h4>Marketplace</h4>
-                        <Link to="/products">
-                            Products
-                        </Link>
-                        <Link to="/categories">
-                            Categories
-                        </Link>
-                        <Link to="/stores">
-                            Stores
-                        </Link>
-                    </div>
-
-                    <div>
-                        <h4>Customer</h4>
-                        <Link to="/orders">Orders</Link>
-                        <Link to="/wishlist">
-                            Wishlist
-                        </Link>
-                        <Link to="/cart">Cart</Link>
-                    </div>
-
-                    <div>
-                        <h4>Sell with us</h4>
-                        <Link to="/sell">
-                            Become a seller
-                        </Link>
-                        <Link to="/seller">
-                            Seller dashboard
-                        </Link>
-                    </div>
+                    <Link to="/sell" className="nf-stores-cta-btn">
+                        Become a seller <IconArrow />
+                    </Link>
                 </div>
+            </section>
 
-                <div className="marketplace-footer-bottom">
-                    © {new Date().getFullYear()}{" "}
-                    KelvohMarket. All rights reserved.
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 };
+
+/* =========================================================
+   HEADER (local)
+========================================================= */
+
+function Header({ minimal = false }) {
+    return (
+        <header className="marketplace-header">
+            <div className="marketplace-header-inner">
+                <Link to="/" className="marketplace-logo" aria-label="Nila Fashion home">
+                    <span className="marketplace-logo-mark">NF</span>
+                    <span>Nila<strong>Fashion</strong></span>
+                </Link>
+
+                {!minimal && (
+                    <>
+                        <form
+                            className="marketplace-search"
+                            role="search"
+                            onSubmit={(e) => e.preventDefault()}
+                        >
+                            <label htmlFor="stores-header-search" className="nf-visually-hidden">
+                                Search products
+                            </label>
+                            <input
+                                id="stores-header-search"
+                                type="text"
+                                placeholder="Search products, brands and more..."
+                            />
+                            <button type="submit">Search</button>
+                        </form>
+
+                        <div className="marketplace-header-actions">
+                            <Link to="/wishlist" className="nf-header-link">
+                                <span aria-hidden="true">♡</span>
+                                <span>Wishlist</span>
+                            </Link>
+                            <Link to="/cart" className="nf-header-link">
+                                <span aria-hidden="true">🛍</span>
+                                <span>Cart</span>
+                            </Link>
+                            <Link to="/login" className="marketplace-login">
+                                Sign In
+                            </Link>
+                        </div>
+                    </>
+                )}
+            </div>
+        </header>
+    );
+}
+
+/* =========================================================
+   FOOTER (local)
+========================================================= */
+
+function Footer() {
+    return (
+        <footer className="marketplace-footer">
+            <div className="marketplace-footer-grid">
+                <div>
+                    <Link to="/" className="marketplace-logo footer-logo">
+                        <span className="marketplace-logo-mark">NF</span>
+                        <span>Nila<strong>Fashion</strong></span>
+                    </Link>
+                    <p>
+                        A modern marketplace connecting customers with
+                        trusted clothing sellers.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Marketplace</h3>
+                    <Link to="/products">Products</Link>
+                    <Link to="/categories">Categories</Link>
+                    <Link to="/stores">Stores</Link>
+                </div>
+
+                <div>
+                    <h3>Customer</h3>
+                    <Link to="/orders">Orders</Link>
+                    <Link to="/wishlist">Wishlist</Link>
+                    <Link to="/cart">Cart</Link>
+                </div>
+
+                <div>
+                    <h3>Sell with us</h3>
+                    <Link to="/sell">Become a seller</Link>
+                    <Link to="/seller">Seller dashboard</Link>
+                </div>
+            </div>
+
+            <div className="marketplace-footer-bottom">
+                <span>
+                    © {new Date().getFullYear()} Nila Fashion. All rights reserved.
+                </span>
+                <span>Secure checkout • M-Pesa supported</span>
+            </div>
+        </footer>
+    );
+}
 
 export default Stores;
