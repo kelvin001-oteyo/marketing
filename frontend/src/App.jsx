@@ -64,347 +64,166 @@ import AdminRoute from "./routes/AdminRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
-return ( <BrowserRouter> <Routes>
+    return (
+        <BrowserRouter>
+            <Routes>
 
-```
-            {/* ========================================================
-                PUBLIC CUSTOMER MARKETPLACE
-            ========================================================= */}
+                {/* ========================================================
+                    PUBLIC CUSTOMER MARKETPLACE
+                ========================================================= */}
 
-            <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home />} />
 
-            <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login />} />
 
-            <Route path="/register" element={<Register />} />
+                <Route path="/register" element={<Register />} />
 
-            <Route path="/contact" element={<Contact />} />
+                <Route path="/contact" element={<Contact />} />
 
-            <Route
-                path="/products"
-                element={<Products />}
-            />
+                <Route path="/products" element={<Products />} />
 
-            <Route
-                path="/products/:id"
-                element={<ProductDetails />}
-            />
+                <Route path="/products/:id" element={<ProductDetails />} />
 
-            <Route
-                path="/categories"
-                element={<Categories />}
-            />
+                <Route path="/categories" element={<Categories />} />
 
-            <Route
-                path="/categories/:slug"
-                element={<CategoryProducts />}
-            />
+                <Route path="/categories/:slug" element={<CategoryProducts />} />
 
-            <Route
-                path="/stores"
-                element={<Stores />}
-            />
+                <Route path="/stores" element={<Stores />} />
 
-            <Route
-                path="/stores/:slug"
-                element={<StoreDetails />}
-            />
+                <Route path="/stores/:slug" element={<StoreDetails />} />
 
-            <Route
-                path="/search"
-                element={<Search />}
-            />
+                <Route path="/search" element={<Search />} />
 
+                {/* Public seller onboarding */}
+                <Route path="/sell" element={<SellerApplication />} />
 
-            {/* ========================================================
-                AUTHENTICATED CUSTOMER AREA
-            ========================================================= */}
+                {/* ========================================================
+                    AUTHENTICATED CUSTOMER AREA
+                ========================================================= */}
 
-            <Route element={<ProtectedRoute />}>
+                <Route element={<ProtectedRoute />}>
 
-                <Route
-                    path="/cart"
-                    element={<Cart />}
-                />
+                    <Route path="/cart" element={<Cart />} />
 
-                <Route
-                    path="/wishlist"
-                    element={<Wishlist />}
-                />
+                    <Route path="/wishlist" element={<Wishlist />} />
 
-                <Route
-                    path="/checkout"
-                    element={<Checkout />}
-                />
+                    <Route path="/checkout" element={<Checkout />} />
 
-                <Route
-                    path="/orders/success"
-                    element={<OrderSuccess />}
-                />
+                    <Route path="/orders/success" element={<OrderSuccess />} />
 
-                <Route
-                    path="/orders"
-                    element={<Orders />}
-                />
+                    <Route path="/orders" element={<Orders />} />
 
-                <Route
-                    path="/orders/:id"
-                    element={<OrderDetails />}
-                />
+                    <Route path="/orders/:id" element={<OrderDetails />} />
 
-                <Route
-                    path="/profile"
-                    element={<Profile />}
-                />
+                    <Route path="/profile" element={<Profile />} />
 
-                <Route
-                    path="/addresses"
-                    element={<Addresses />}
-                />
-
-                <Route
-                    path="/sell"
-                    element={<SellerApplication />}
-                />
-
-            </Route>
-
-
-            {/* ========================================================
-                SELLER DASHBOARD
-            ========================================================= */}
-
-            <Route
-                element={
-                    <ProtectedRoute allowedRoles={["SELLER"]} />
-                }
-            >
-
-                <Route
-                    path="/sell/dashboard"
-                    element={<SellerDashboard />}
-                />
-
-                <Route
-                    path="/seller"
-                    element={
-                        <Navigate
-                            to="/sell/dashboard"
-                            replace
-                        />
-                    }
-                />
-
-                <Route
-                    path="/seller/dashboard"
-                    element={
-                        <Navigate
-                            to="/sell/dashboard"
-                            replace
-                        />
-                    }
-                />
-
-                <Route
-                    path="/seller/products"
-                    element={<SellerProducts />}
-                />
-
-                <Route
-                    path="/seller/products/new"
-                    element={<SellerAddProduct />}
-                />
-
-                <Route
-                    path="/seller/products/:id/edit"
-                    element={<SellerEditProduct />}
-                />
-
-                <Route
-                    path="/seller/products/:id/variants"
-                    element={<SellerProductVariants />}
-                />
-
-                <Route
-                    path="/seller/inventory"
-                    element={<SellerInventory />}
-                />
-
-                <Route
-                    path="/seller/orders"
-                    element={<SellerOrders />}
-                />
-
-                <Route
-                    path="/seller/store"
-                    element={<SellerStore />}
-                />
-
-            </Route>
-
-
-            {/* ========================================================
-                ADMIN DASHBOARD
-            ========================================================= */}
-
-            <Route element={<AdminRoute />}>
-
-                <Route
-                    path="/admin"
-                    element={<AdminLayout />}
-                >
-
-                    <Route
-                        index
-                        element={<Dashboard />}
-                    />
-
-                    <Route
-                        path="products"
-                        element={<ProductsAdmin />}
-                    />
-
-                    <Route
-                        path="products/add"
-                        element={<AddProduct />}
-                    />
-
-                    <Route
-                        path="products/:id/edit"
-                        element={<EditProduct />}
-                    />
-
-                    <Route
-                        path="products/:id/variants"
-                        element={<ProductVariants />}
-                    />
-
-                    <Route
-                        path="inventory"
-                        element={<InventoryAdmin />}
-                    />
-
-                    <Route
-                        path="categories"
-                        element={<CategoriesAdmin />}
-                    />
-
-                    <Route
-                        path="sellers"
-                        element={<SellersAdmin />}
-                    />
-
-                    <Route
-                        path="customers"
-                        element={<CustomersAdmin />}
-                    />
-
-                    <Route
-                        path="orders"
-                        element={<OrdersAdmin />}
-                    />
-
-                    <Route
-                        path="promotions"
-                        element={<PromotionsAdmin />}
-                    />
-
-                    <Route
-                        path="reviews"
-                        element={<ReviewsAdmin />}
-                    />
-
-                    <Route
-                        path="notifications"
-                        element={<NotificationsAdmin />}
-                    />
-
-                    <Route
-                        path="reports"
-                        element={<ReportsAdmin />}
-                    />
-
-                    <Route
-                        path="settings"
-                        element={<SettingsAdmin />}
-                    />
+                    <Route path="/addresses" element={<Addresses />} />
 
                 </Route>
 
-            </Route>
+                {/* ========================================================
+                    SELLER DASHBOARD
+                ========================================================= */}
 
+                <Route element={<ProtectedRoute allowedRoles={["SELLER"]} />}>
 
-            {/* ========================================================
-                FALLBACK
-            ========================================================= */}
+                    <Route path="/sell/dashboard" element={<SellerDashboard />} />
 
-            <Route
-                path="*"
-                element={
-                    <Navigate
-                        to="/"
-                        replace
+                    <Route
+                        path="/seller"
+                        element={<Navigate to="/sell/dashboard" replace />}
                     />
-                }
-            />
 
-        </Routes>
+                    <Route
+                        path="/seller/dashboard"
+                        element={<Navigate to="/sell/dashboard" replace />}
+                    />
 
-        {/* ============================================================
-            NILA FASHION FOOTER
-        ============================================================ */}
+                    <Route path="/seller/products" element={<SellerProducts />} />
 
-        <footer
-            style={{
-                marginTop: "40px",
-                padding: "30px 20px",
-                textAlign: "center",
-                borderTop: "1px solid #e5e7eb",
-                background: "#ffffff"
-            }}
-        >
-            <h3
-                style={{
-                    margin: "0 0 10px",
-                    fontSize: "20px",
-                    fontWeight: "700"
-                }}
-            >
-                NILA FASHION
-            </h3>
+                    <Route
+                        path="/seller/products/new"
+                        element={<SellerAddProduct />}
+                    />
 
-            <p
-                style={{
-                    margin: "6px 0",
-                    color: "#555"
-                }}
-            >
-                +254790171964
-            </p>
+                    <Route
+                        path="/seller/products/:id/edit"
+                        element={<SellerEditProduct />}
+                    />
 
-            <p
-                style={{
-                    margin: "6px 0",
-                    color: "#555"
-                }}
-            >
-                musimbilinda1992@gmail.com
-            </p>
+                    <Route
+                        path="/seller/products/:id/variants"
+                        element={<SellerProductVariants />}
+                    />
 
-            <p
-                style={{
-                    margin: "18px 0 0",
-                    fontSize: "13px",
-                    color: "#888"
-                }}
-            >
-                © {new Date().getFullYear()} NILA FASHION. All rights reserved.
-            </p>
-        </footer>
+                    <Route path="/seller/inventory" element={<SellerInventory />} />
 
-    </BrowserRouter>
-);
-```
+                    <Route path="/seller/orders" element={<SellerOrders />} />
 
+                    <Route path="/seller/store" element={<SellerStore />} />
+
+                </Route>
+
+                {/* ========================================================
+                    ADMIN DASHBOARD
+                ========================================================= */}
+
+                <Route element={<AdminRoute />}>
+
+                    <Route path="/admin" element={<AdminLayout />}>
+
+                        <Route index element={<Dashboard />} />
+
+                        <Route path="products" element={<ProductsAdmin />} />
+
+                        <Route path="products/add" element={<AddProduct />} />
+
+                        <Route
+                            path="products/:id/edit"
+                            element={<EditProduct />}
+                        />
+
+                        <Route
+                            path="products/:id/variants"
+                            element={<ProductVariants />}
+                        />
+
+                        <Route path="inventory" element={<InventoryAdmin />} />
+
+                        <Route path="categories" element={<CategoriesAdmin />} />
+
+                        <Route path="sellers" element={<SellersAdmin />} />
+
+                        <Route path="customers" element={<CustomersAdmin />} />
+
+                        <Route path="orders" element={<OrdersAdmin />} />
+
+                        <Route path="promotions" element={<PromotionsAdmin />} />
+
+                        <Route path="reviews" element={<ReviewsAdmin />} />
+
+                        <Route
+                            path="notifications"
+                            element={<NotificationsAdmin />}
+                        />
+
+                        <Route path="reports" element={<ReportsAdmin />} />
+
+                        <Route path="settings" element={<SettingsAdmin />} />
+
+                    </Route>
+
+                </Route>
+
+                {/* ========================================================
+                    FALLBACK
+                ========================================================= */}
+
+                <Route path="*" element={<Navigate to="/" replace />} />
+
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
