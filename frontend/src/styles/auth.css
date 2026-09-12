@@ -1,4 +1,151 @@
+/* =========================================================
+   NILA FASHION — REGISTER PAGE (add-on)
+   Builds on top of the Login add-on (reuses .nf-auth-*)
+========================================================= */
 
+/* --- Slightly wider left column for the longer form --- */
+.nf-register-col {
+    padding: 44px 44px 40px;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+/* --- Form sections (fieldset) --- */
+.nf-fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0 0 4px;
+    display: grid;
+    gap: 14px;
+}
+
+.nf-fieldset legend {
+    padding: 0;
+    margin-bottom: 4px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.nf-fieldset + .nf-fieldset {
+    padding-top: 18px;
+    border-top: 1px solid #f0f1f3;
+}
+
+/* --- Two-column mini grid inside a section --- */
+.nf-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* --- Password strength meter --- */
+.nf-strength {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nf-strength-bars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+}
+.nf-strength-bars span {
+    height: 4px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    transition: background 0.2s ease;
+}
+
+/* Weak */
+.nf-strength-weak .nf-strength-bars span:nth-child(-n + 2) { background: #ef4444; }
+.nf-strength-weak small { color: #b91c1c; }
+
+/* Good */
+.nf-strength-good .nf-strength-bars span:nth-child(-n + 4) { background: #f59e0b; }
+.nf-strength-good small { color: #b45309; }
+
+/* Strong */
+.nf-strength-strong .nf-strength-bars span { background: #0b7a3e; }
+.nf-strength-strong small { color: #0b7a3e; }
+
+.nf-strength small {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* --- Match hint under confirm password --- */
+.nf-match-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+.nf-match-hint.is-ok { color: #0b7a3e; }
+.nf-match-hint.is-bad { color: #b91c1c; }
+
+/* --- Input error state --- */
+.nf-input-error,
+.nf-auth-card input.nf-input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* --- Terms line under submit --- */
+.nf-terms {
+    margin: -6px 0 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+}
+.nf-terms a {
+    color: #172033;
+    font-weight: 700;
+    text-decoration: none;
+}
+.nf-terms a:hover { text-decoration: underline; }
+
+/* --- Register aside gets its own photo --- */
+.nf-register-aside .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=70");
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .nf-register-col {
+        max-height: none;
+        overflow: visible;
+        padding: 40px 32px;
+    }
+}
+
+@media (max-width: 640px) {
+    .nf-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .nf-register-col {
+        padding: 28px 20px;
+    }
+    .nf-fieldset + .nf-fieldset {
+        padding-top: 16px;
+    }
+}
+
+/* --- Focus rings (extends the login page rule) --- */
+.nf-register-col input:focus-visible,
+.nf-register-col button:focus-visible,
+.nf-register-col a:focus-visible {
+    outline: 2px solid #172033;
+    outline-offset: 2px;
+}
 
 /* =========================================================
    NILA FASHION — AUTH PAGE REDESIGN (add-on)
