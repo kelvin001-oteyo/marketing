@@ -1,29 +1,615 @@
+/* =========================================================
+   NILA FASHION — AUTH STYLESHEET
+   Covers: Login, Register, Contact, Help, Returns
+========================================================= */
 
 
 /* =========================================================
-   NILA FASHION — CONTACT PAGE (add-on)
-   Reuses .nf-auth-* from Login / Register.
+   1. PAGE SHELL
+========================================================= */
+
+.nf-auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(23, 32, 51, 0.08), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(255, 106, 0, 0.06), transparent 50%),
+        #f8fafc;
+}
+
+
+/* =========================================================
+   2. CARD LAYOUT (two column on desktop)
+========================================================= */
+
+.nf-auth-card {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow:
+        0 40px 100px -30px rgba(15, 23, 42, 0.18),
+        0 8px 24px -8px rgba(15, 23, 42, 0.08);
+}
+
+.nf-auth-card-wide {
+    max-width: 1280px;
+}
+
+/* ---- Left: form column ---- */
+.nf-auth-form-col {
+    padding: 56px 64px 48px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.nf-auth-form-col-register {
+    padding: 48px 56px 44px;
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+
+/* =========================================================
+   3. BRAND LOCKUP
+========================================================= */
+
+.nf-auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #172033;
+    margin-bottom: 44px;
+    width: fit-content;
+}
+
+.nf-auth-logo-mark {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #172033;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+}
+
+.nf-auth-wordmark {
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: #172033;
+    white-space: nowrap;
+}
+
+.nf-auth-wordmark em {
+    font-style: normal;
+    font-weight: 800;
+    color: #172033;
+    margin-left: 2px;
+}
+
+
+/* =========================================================
+   4. HEADING
+========================================================= */
+
+.nf-auth-head {
+    margin-bottom: 28px;
+}
+
+.nf-auth-eyebrow {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.nf-auth-head h1 {
+    margin: 0 0 10px;
+    color: #172033;
+    font-size: clamp(26px, 3vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+}
+
+.nf-auth-sub {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 440px;
+}
+
+
+/* =========================================================
+   5. ALERTS
+========================================================= */
+
+.nf-auth-alert {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    background: #fef2f2;
+    color: #991b1b;
+    font-size: 13px;
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   6. FORM
+========================================================= */
+
+.nf-auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nf-auth-fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+}
+
+.nf-auth-fieldset legend {
+    padding: 0 0 4px;
+    margin: 0;
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.nf-auth-fieldset + .nf-auth-fieldset {
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.nf-auth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.nf-auth-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.nf-auth-label {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+}
+
+.nf-auth-field input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 52px;
+    padding: 0 16px;
+    border: 1px solid #d7dce3;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #172033;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease,
+                background 0.15s ease;
+}
+
+.nf-auth-field input::placeholder {
+    color: #94a3b8;
+}
+
+.nf-auth-field input:hover:not(:disabled) {
+    border-color: #cbd5e1;
+}
+
+.nf-auth-field input:focus {
+    border-color: #172033;
+    box-shadow: 0 0 0 4px rgba(23, 32, 51, 0.08);
+}
+
+.nf-auth-field input:disabled {
+    background: #f8fafc;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* ---- Password input wrapper ---- */
+.nf-auth-input-wrap {
+    position: relative;
+}
+
+.nf-auth-input-wrap input {
+    padding-right: 52px;
+}
+
+.nf-auth-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.nf-auth-toggle:hover {
+    background: #f1f5f9;
+    color: #172033;
+}
+
+/* ---- Caps lock ---- */
+.nf-auth-caps {
+    display: block;
+    margin-top: 6px;
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* ---- Input error ---- */
+.nf-auth-input-error,
+input.nf-auth-input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+}
+
+/* =========================================================
+   7. REMEMBER / FORGOT ROW
+========================================================= */
+
+.nf-auth-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -6px 0 0;
+    font-size: 13px;
+}
+
+.nf-auth-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.nf-auth-remember input {
+    width: 16px;
+    height: 16px;
+    accent-color: #172033;
+    cursor: pointer;
+}
+
+.nf-auth-link {
+    color: #172033;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 13px;
+}
+.nf-auth-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   8. SUBMIT BUTTON
+========================================================= */
+
+.nf-auth-submit {
+    min-height: 52px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: #172033;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease,
+                box-shadow 0.15s ease;
+    box-shadow:
+        0 8px 20px -8px rgba(23, 32, 51, 0.35),
+        0 2px 6px -2px rgba(23, 32, 51, 0.2);
+}
+.nf-auth-submit:hover:not(:disabled) {
+    background: #0f172a;
+    transform: translateY(-1px);
+    box-shadow:
+        0 14px 30px -10px rgba(23, 32, 51, 0.4),
+        0 4px 10px -4px rgba(23, 32, 51, 0.25);
+}
+.nf-auth-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+.nf-auth-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   9. PASSWORD STRENGTH + MATCH HINTS
+========================================================= */
+
+.nf-auth-strength {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nf-auth-strength-bars {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+}
+.nf-auth-strength-bars span {
+    height: 4px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    transition: background 0.2s ease;
+}
+
+.nf-auth-strength-weak .nf-auth-strength-bars span:nth-child(-n + 2) { background: #ef4444; }
+.nf-auth-strength-weak small { color: #b91c1c; }
+
+.nf-auth-strength-good .nf-auth-strength-bars span:nth-child(-n + 4) { background: #f59e0b; }
+.nf-auth-strength-good small { color: #b45309; }
+
+.nf-auth-strength-strong .nf-auth-strength-bars span { background: #0b7a3e; }
+.nf-auth-strength-strong small { color: #0b7a3e; }
+
+.nf-auth-strength small {
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.nf-auth-match {
+    display: block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+}
+.nf-auth-match.is-ok { color: #0b7a3e; }
+.nf-auth-match.is-bad { color: #b91c1c; }
+
+
+/* =========================================================
+   10. TERMS / FOOTER / TRUST ROW
+========================================================= */
+
+.nf-auth-terms {
+    margin: 4px 0 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+    text-align: center;
+}
+.nf-auth-terms a {
+    color: #172033;
+    font-weight: 700;
+    text-decoration: none;
+}
+.nf-auth-terms a:hover { text-decoration: underline; }
+
+.nf-auth-footer {
+    margin: 28px 0 0;
+    color: #64748b;
+    font-size: 13px;
+    text-align: center;
+}
+.nf-auth-footer a {
+    color: #172033;
+    font-weight: 800;
+    text-decoration: none;
+}
+.nf-auth-footer a:hover { text-decoration: underline; }
+
+.nf-auth-trust {
+    list-style: none;
+    padding: 20px 0 0;
+    margin: 24px 0 0;
+    border-top: 1px solid #f1f5f9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.nf-auth-trust li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.nf-auth-trust svg { color: #0b7a3e; flex-shrink: 0; }
+
+
+/* =========================================================
+   11. RIGHT PANEL — brand photo
+========================================================= */
+
+.nf-auth-aside {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: #0f172a;
+    isolation: isolate;
+    min-height: 100%;
+}
+
+.nf-auth-aside-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80");
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    transform: scale(1.05);
+}
+
+.nf-auth-aside-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.94) 0%,
+        rgba(15, 23, 42, 0.78) 55%,
+        rgba(15, 23, 42, 0.6) 100%
+    );
+    z-index: -1;
+}
+
+.nf-auth-aside-content {
+    position: relative;
+    height: 100%;
+    padding: 56px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nf-auth-aside-eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #cbd5e1;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.nf-auth-aside-title {
+    margin: 0 0 18px;
+    font-size: clamp(28px, 2.6vw, 36px);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.nf-auth-aside-text {
+    max-width: 360px;
+    margin: 0 0 32px;
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.nf-auth-aside-list {
+    list-style: none;
+    padding: 20px 22px;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.nf-auth-aside-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f1f5f9;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.nf-auth-aside-list li span {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(126, 226, 168, 0.18);
+    color: #7ee2a8;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* Register aside gets its own photo */
+.nf-auth-aside-register .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=80");
+}
+
+
+/* =========================================================
+   12. CONTACT / HELP / RETURNS SHARED
 ========================================================= */
 
 .nf-contact-col {
-    padding: 48px 44px;
+    padding: 56px 64px 48px;
 }
 
-/* ---- Contact cards ---- */
 .nf-contact-options {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin: 22px 0 8px;
+    margin: 24px 0 8px;
 }
 
 .nf-contact-card {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    padding: 16px 18px;
+    gap: 16px;
+    padding: 18px 20px;
     border: 1px solid #e2e8f0;
-    border-radius: 14px;
+    border-radius: 16px;
     background: #ffffff;
     color: inherit;
     text-decoration: none;
@@ -38,8 +624,8 @@
 }
 
 .nf-contact-icon {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
     display: inline-flex;
     align-items: center;
@@ -57,7 +643,7 @@
 .nf-contact-card > div {
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
     min-width: 0;
 }
 .nf-contact-card strong {
@@ -78,553 +664,155 @@
     font-weight: 500;
 }
 
-/* ---- Contact aside photo ---- */
-.nf-contact-aside .nf-auth-aside-bg {
-    background-image: url("https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=70");
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 900px) {
-    .nf-contact-col {
-        padding: 40px 32px;
-    }
-}
-
-@media (max-width: 640px) {
-    .nf-contact-col {
-        padding: 28px 20px;
-    }
-    .nf-contact-options {
-        gap: 10px;
-    }
-    .nf-contact-card {
-        padding: 14px;
-        gap: 12px;
-    }
-    .nf-contact-icon {
-        width: 38px;
-        height: 38px;
-    }
-}
-
-/* Focus ring polish (uses the same token as the other auth pages) */
-.nf-contact-col a:focus-visible {
-    outline: 2px solid #172033;
-    outline-offset: 2px;
-}
-
-
-/* =========================================================
-   NILA FASHION — REGISTER PAGE (add-on)
-   Builds on top of the Login add-on (reuses .nf-auth-*)
-========================================================= */
-
-/* --- Slightly wider left column for the longer form --- */
-.nf-register-col {
-    padding: 44px 44px 40px;
-    overflow-y: auto;
-    max-height: 100vh;
-}
-
-/* --- Form sections (fieldset) --- */
-.nf-fieldset {
-    border: 0;
-    padding: 0;
-    margin: 0 0 4px;
-    display: grid;
-    gap: 14px;
-}
-
-.nf-fieldset legend {
-    padding: 0;
-    margin-bottom: 4px;
-    color: #94a3b8;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-}
-
-.nf-fieldset + .nf-fieldset {
-    padding-top: 18px;
-    border-top: 1px solid #f0f1f3;
-}
-
-/* --- Two-column mini grid inside a section --- */
-.nf-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
-/* --- Password strength meter --- */
-.nf-strength {
-    margin-top: 8px;
+.nf-help-topics {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-}
-
-.nf-strength-bars {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-}
-.nf-strength-bars span {
-    height: 4px;
-    border-radius: 999px;
-    background: #e2e8f0;
-    transition: background 0.2s ease;
-}
-
-/* Weak */
-.nf-strength-weak .nf-strength-bars span:nth-child(-n + 2) { background: #ef4444; }
-.nf-strength-weak small { color: #b91c1c; }
-
-/* Good */
-.nf-strength-good .nf-strength-bars span:nth-child(-n + 4) { background: #f59e0b; }
-.nf-strength-good small { color: #b45309; }
-
-/* Strong */
-.nf-strength-strong .nf-strength-bars span { background: #0b7a3e; }
-.nf-strength-strong small { color: #0b7a3e; }
-
-.nf-strength small {
-    font-size: 11px;
-    font-weight: 700;
-}
-
-/* --- Match hint under confirm password --- */
-.nf-match-hint {
-    display: block;
-    margin-top: 6px;
-    font-size: 11px;
-    font-weight: 700;
-}
-.nf-match-hint.is-ok { color: #0b7a3e; }
-.nf-match-hint.is-bad { color: #b91c1c; }
-
-/* --- Input error state --- */
-.nf-input-error,
-.nf-auth-card input.nf-input-error {
-    border-color: #ef4444 !important;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-}
-
-/* --- Terms line under submit --- */
-.nf-terms {
-    margin: -6px 0 0;
-    color: #64748b;
-    font-size: 11px;
-    line-height: 1.6;
-    text-align: center;
-}
-.nf-terms a {
-    color: #172033;
-    font-weight: 700;
-    text-decoration: none;
-}
-.nf-terms a:hover { text-decoration: underline; }
-
-/* --- Register aside gets its own photo --- */
-.nf-register-aside .nf-auth-aside-bg {
-    background-image: url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1200&q=70");
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media (max-width: 900px) {
-    .nf-register-col {
-        max-height: none;
-        overflow: visible;
-        padding: 40px 32px;
-    }
-}
-
-@media (max-width: 640px) {
-    .nf-form-grid {
-        grid-template-columns: 1fr;
-    }
-    .nf-register-col {
-        padding: 28px 20px;
-    }
-    .nf-fieldset + .nf-fieldset {
-        padding-top: 16px;
-    }
-}
-
-/* --- Focus rings (extends the login page rule) --- */
-.nf-register-col input:focus-visible,
-.nf-register-col button:focus-visible,
-.nf-register-col a:focus-visible {
-    outline: 2px solid #172033;
-    outline-offset: 2px;
-}
-
-/* =========================================================
-   NILA FASHION — AUTH PAGE REDESIGN (add-on)
-   Safe: uses new class names only.
-========================================================= */
-
-/* --- Page shell: two-column card on desktop --- */
-.nf-auth-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    min-height: 100vh;
-    background:
-        radial-gradient(circle at 15% 0%, rgba(23, 32, 51, 0.06), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(23, 32, 51, 0.05), transparent 50%),
-        #f8fafc;
-}
-
-.nf-auth-card {
-    width: 100%;
-    max-width: 1080px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    background: #ffffff;
-    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.1);
-}
-
-/* --- Left column --- */
-.nf-auth-form-col {
-    padding: 48px 44px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* --- Brand lockup --- */
-.nf-auth-card .auth-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #172033;
-    text-decoration: none;
-    margin-bottom: 32px;
-}
-
-.nf-auth-card .auth-brand strong {
-    display: block;
-    font-size: 13px;
-    font-weight: 800;
-}
-
-.nf-auth-logo-mark {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    background: #172033;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 800;
-}
-
-/* --- Password toggle wrapper --- */
-.nf-password-wrap {
-    position: relative;
-    display: block;
-}
-
-.nf-password-wrap input {
-    width: 100%;
-    padding-right: 46px;
-}
-
-.nf-password-toggle {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: #64748b;
-    cursor: pointer;
-}
-.nf-password-toggle:hover {
-    background: #f1f5f9;
-    color: #172033;
-}
-
-/* --- Caps lock hint --- */
-.nf-caps-hint {
-    display: block;
-    margin-top: 6px;
-    color: #b45309;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-/* --- Remember / Forgot row --- */
-.nf-auth-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     gap: 12px;
-    margin: -4px 0 6px;
-    font-size: 13px;
+    margin: 24px 0 8px;
 }
-
-.nf-auth-remember {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    align-items: center;
-    gap: 8px !important;
-    font-size: 13px;
-    color: #475569;
-    font-weight: 500 !important;
-}
-
-.nf-auth-remember input {
-    width: 16px;
-    height: 16px;
-    accent-color: #172033;
-}
-
-.nf-auth-forgot {
-    color: #172033;
-    font-weight: 600;
-    text-decoration: none;
-}
-.nf-auth-forgot:hover { text-decoration: underline; }
-
-/* --- Big submit button --- */
-.nf-auth-submit {
-    min-height: 48px;
-    margin-top: 4px;
-    border: 0;
-    border-radius: 10px;
-    background: #172033;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
-}
-.nf-auth-submit:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 12px 24px rgba(23, 32, 51, 0.22);
-}
-.nf-auth-submit:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* --- Trust row under the form --- */
-.nf-auth-trust {
+.nf-help-topic {
     display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin-top: 26px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f1f3;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease,
+                transform 0.15s ease;
 }
-.nf-auth-trust > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #64748b;
-    font-size: 11px;
-    font-weight: 600;
+.nf-help-topic:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
+    transform: translateY(-1px);
 }
-.nf-auth-trust svg { color: #0b7a3e; }
-
-/* --- Right brand panel --- */
-.nf-auth-aside {
-    position: relative;
-    overflow: hidden;
-    color: #ffffff;
-    background: #0f172a;
-    isolation: isolate;
-}
-
-.nf-auth-aside-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=70");
-    background-size: cover;
-    background-position: center;
-    z-index: -2;
-    transform: scale(1.05);
-}
-
-.nf-auth-aside-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        135deg,
-        rgba(15, 23, 42, 0.92) 0%,
-        rgba(15, 23, 42, 0.72) 60%,
-        rgba(15, 23, 42, 0.55) 100%
-    );
-    z-index: -1;
-}
-
-.nf-auth-aside-content {
-    position: relative;
-    height: 100%;
-    padding: 56px 44px;
+.nf-help-topic > div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 4px;
+    min-width: 0;
 }
-
-.nf-auth-aside-content .section-eyebrow {
-    color: #cbd5e1;
-}
-
-.nf-auth-aside-content h2 {
-    margin: 12px 0 16px;
-    font-size: 32px;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: #ffffff;
-}
-
-.nf-auth-aside-content > p {
-    max-width: 340px;
-    margin: 0 0 28px;
-    color: #cbd5e1;
+.nf-help-topic strong {
+    color: #172033;
     font-size: 14px;
-    line-height: 1.7;
+    font-weight: 800;
+}
+.nf-help-topic span {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.55;
 }
 
-.nf-auth-aside-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 10px;
+.nf-contact-aside .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80");
 }
-.nf-auth-aside-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #e2e8f0;
-    font-size: 13px;
-    font-weight: 600;
+.nf-help-aside .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80");
 }
-.nf-auth-aside-list li span {
-    width: 22px;
-    height: 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    font-size: 12px;
+.nf-returns-aside .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80");
 }
+
 
 /* =========================================================
-   RESPONSIVE
+   13. RESPONSIVE
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .nf-auth-card {
         grid-template-columns: 1fr;
+        max-width: 720px;
     }
     .nf-auth-aside {
         display: none;
     }
     .nf-auth-form-col {
-        padding: 40px 32px;
+        padding: 48px 44px 40px;
+    }
+    .nf-auth-form-col-register {
+        padding: 44px 44px 40px;
+        max-height: none;
+        overflow: visible;
+    }
+    .nf-contact-col {
+        padding: 48px 44px 40px;
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
     .nf-auth-page {
         padding: 20px 12px;
     }
     .nf-auth-card {
-        border-radius: 14px;
+        border-radius: 18px;
+        box-shadow:
+            0 20px 50px -20px rgba(15, 23, 42, 0.2),
+            0 4px 12px -4px rgba(15, 23, 42, 0.08);
     }
-    .nf-auth-form-col {
-        padding: 28px 20px;
+    .nf-auth-form-col,
+    .nf-auth-form-col-register,
+    .nf-contact-col {
+        padding: 32px 22px 28px;
     }
-    .nf-auth-trust {
-        gap: 12px;
+    .nf-auth-brand {
+        margin-bottom: 32px;
+    }
+    .nf-auth-grid {
+        grid-template-columns: 1fr;
+    }
+    .nf-auth-head h1 {
+        font-size: 24px;
+    }
+    .nf-auth-field input {
+        height: 48px;
     }
     .nf-auth-submit {
-        min-height: 46px;
+        min-height: 50px;
+    }
+    .nf-auth-trust {
+        gap: 10px;
+        padding-top: 16px;
+        margin-top: 20px;
+    }
+    .nf-auth-trust li {
+        font-size: 10px;
+    }
+    .nf-auth-trust svg {
+        width: 13px;
+        height: 13px;
+    }
+    .nf-contact-card,
+    .nf-help-topic {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    .nf-contact-icon {
+        width: 40px;
+        height: 40px;
     }
 }
 
-/* Focus ring polish */
+@media (max-width: 420px) {
+    .nf-auth-trust {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    .nf-auth-trust li {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   14. FOCUS RINGS
+========================================================= */
+
+.nf-auth-card a:focus-visible,
+.nf-auth-card button:focus-visible,
 .nf-auth-card input:focus-visible,
-.nf-auth-submit:focus-visible,
-.nf-password-toggle:focus-visible,
-.nf-auth-forgot:focus-visible,
-.nf-auth-card .auth-brand:focus-visible {
+.nf-auth-card select:focus-visible,
+.nf-auth-card textarea:focus-visible {
     outline: 2px solid #172033;
     outline-offset: 2px;
-}
-
-.auth-page {
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 32px 16px;
-    background: linear-gradient(135deg, #eaf0f8, #f8fafc 52%, #fef3e8);
-}
-
-.auth-card {
-    width: min(100%, 620px);
-    padding: clamp(28px, 5vw, 48px);
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    background: #fff;
-    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
-}
-
-.auth-brand {
-    color: #172033;
-    font-size: 20px;
-    font-weight: 800;
-    text-decoration: none;
-}
-
-.auth-brand span { color: #ff6a00; }
-.auth-eyebrow { margin: 32px 0 8px; color: #ff6a00; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; }
-.auth-card h1 { margin: 0; color: #172033; font-size: clamp(26px, 4vw, 36px); }
-.auth-intro { margin: 12px 0 28px; color: #64748b; line-height: 1.6; }
-.auth-alert { margin-bottom: 18px; padding: 12px 14px; border: 1px solid #fecaca; border-radius: 8px; background: #fef2f2; color: #991b1b; }
-.auth-form { display: grid; gap: 18px; }
-.auth-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.auth-form label { display: grid; gap: 7px; color: #344054; font-size: 13px; font-weight: 700; }
-.auth-form input { width: 100%; height: 44px; padding: 0 12px; border: 1px solid #d0d5dd; border-radius: 8px; outline: none; }
-.auth-form input:focus { border-color: #ff6a00; box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.12); }
-.auth-form button { min-height: 46px; border: 0; border-radius: 8px; background: #172033; color: #fff; font-weight: 700; cursor: pointer; }
-.auth-form button:disabled { opacity: 0.65; cursor: wait; }
-.auth-form-full { grid-column: 1 / -1; }
-.auth-footer { margin: 28px 0 0; color: #64748b; text-align: center; }
-.auth-footer a { color: #ff6a00; font-weight: 700; text-decoration: none; }
-.auth-contact-details { display: grid; gap: 12px; padding: 20px; border-radius: 10px; background: #f8fafc; }
-.auth-contact-details a { color: #172033; font-weight: 700; text-decoration: none; }
-.auth-contact-details a:hover { color: #ff6a00; }
-
-@media (max-width: 560px) {
-    .auth-form-grid { grid-template-columns: 1fr; }
-    .auth-form-full { grid-column: auto; }
+    border-radius: 12px;
 }
