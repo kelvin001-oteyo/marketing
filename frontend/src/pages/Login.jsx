@@ -88,7 +88,6 @@ export default function Login() {
                 headers: { Authorization: `Bearer ${access}` },
             });
 
-            // Dev-only diagnostic — never expose user data in production
             if (import.meta.env.DEV) {
                 // eslint-disable-next-line no-console
                 console.debug("[login] authenticated user:", userResponse.data);
@@ -112,47 +111,52 @@ export default function Login() {
     };
 
     return (
-        <main className="auth-page nf-auth-page">
-            <section className="auth-card nf-auth-card" aria-labelledby="login-title">
+        <main className="nf-auth-page">
+            <section className="nf-auth-card" aria-labelledby="login-title">
 
                 {/* ---------- Left: form ---------- */}
                 <div className="nf-auth-form-col">
 
-                    <Link className="auth-brand" to="/" aria-label="Nila Fashion home">
+                    <Link className="nf-auth-brand" to="/" aria-label="Nila Fashion home">
                         <span className="nf-auth-logo-mark">NF</span>
-                        <span>Nila<strong>Fashion</strong></span>
+                        <span className="nf-auth-wordmark">
+                            Nila<em>Fashion</em>
+                        </span>
                     </Link>
 
-                    <p className="auth-eyebrow">WELCOME BACK</p>
-                    <h1 id="login-title">Sign in to your account</h1>
-                    <p className="auth-intro">
-                        Manage orders, save favourites, and grow your store.
-                    </p>
+                    <header className="nf-auth-head">
+                        <span className="nf-auth-eyebrow">WELCOME BACK</span>
+                        <h1 id="login-title">Sign in to your account</h1>
+                        <p className="nf-auth-sub">
+                            Manage orders, save favourites, and grow your store.
+                        </p>
+                    </header>
 
                     {error && (
-                        <div className="auth-alert" role="alert">
+                        <div className="nf-auth-alert" role="alert">
                             {error}
                         </div>
                     )}
 
-                    <form className="auth-form" onSubmit={handleSubmit} noValidate>
+                    <form className="nf-auth-form" onSubmit={handleSubmit} noValidate>
 
-                        <label htmlFor="username">
-                            Username
+                        <label className="nf-auth-field" htmlFor="username">
+                            <span className="nf-auth-label">Username</span>
                             <input
                                 id="username"
                                 name="username"
                                 autoComplete="username"
                                 value={form.username}
                                 onChange={handleChange}
+                                placeholder="Enter your username"
                                 required
                                 disabled={loading}
                             />
                         </label>
 
-                        <label htmlFor="password">
-                            Password
-                            <div className="nf-password-wrap">
+                        <label className="nf-auth-field" htmlFor="password">
+                            <span className="nf-auth-label">Password</span>
+                            <div className="nf-auth-input-wrap">
                                 <input
                                     id="password"
                                     name="password"
@@ -162,12 +166,13 @@ export default function Login() {
                                     onChange={handleChange}
                                     onKeyUp={handlePasswordKey}
                                     onKeyDown={handlePasswordKey}
+                                    placeholder="Enter your password"
                                     required
                                     disabled={loading}
                                 />
                                 <button
                                     type="button"
-                                    className="nf-password-toggle"
+                                    className="nf-auth-toggle"
                                     onClick={() => setShowPassword((v) => !v)}
                                     aria-label={showPassword ? "Hide password" : "Show password"}
                                     aria-pressed={showPassword}
@@ -178,7 +183,7 @@ export default function Login() {
                             </div>
 
                             {capsLock && (
-                                <small className="nf-caps-hint" role="status">
+                                <small className="nf-auth-caps" role="status">
                                     Caps Lock is on
                                 </small>
                             )}
@@ -189,32 +194,30 @@ export default function Login() {
                                 <input type="checkbox" name="remember" />
                                 <span>Remember me</span>
                             </label>
-                            <Link to="/forgot-password" className="nf-auth-forgot">
+                            <Link to="/forgot-password" className="nf-auth-link">
                                 Forgot password?
                             </Link>
                         </div>
 
-                        <button type="submit" disabled={loading} className="nf-auth-submit">
-                            {loading ? "Signing in..." : "Sign in"}
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="nf-auth-submit"
+                        >
+                            {loading ? "Signing in…" : "Sign in"}
                         </button>
                     </form>
 
-                    <p className="auth-footer">
+                    <p className="nf-auth-footer">
                         New to Nila Fashion?{" "}
                         <Link to="/register">Create an account</Link>
                     </p>
 
-                    <div className="nf-auth-trust">
-                        <span>
-                            <IconShield /> Secure
-                        </span>
-                        <span>
-                            <IconTruck /> Fast delivery
-                        </span>
-                        <span>
-                            <IconTag /> Best prices
-                        </span>
-                    </div>
+                    <ul className="nf-auth-trust">
+                        <li><IconShield /> Secure</li>
+                        <li><IconTruck /> Fast delivery</li>
+                        <li><IconTag /> Best prices</li>
+                    </ul>
                 </div>
 
                 {/* ---------- Right: brand panel ---------- */}
@@ -223,21 +226,23 @@ export default function Login() {
                     <div className="nf-auth-aside-overlay" />
 
                     <div className="nf-auth-aside-content">
-                        <span className="section-eyebrow">NILA FASHION</span>
-                        <h2>
+                        <span className="nf-auth-aside-eyebrow">NILA FASHION</span>
+
+                        <h2 className="nf-auth-aside-title">
                             Style that speaks
                             <br />
                             before you do.
                         </h2>
-                        <p>
-                            Thousands of pieces from trusted sellers —
-                            with M-Pesa checkout in seconds.
+
+                        <p className="nf-auth-aside-text">
+                            Thousands of pieces from trusted sellers — with
+                            M-Pesa checkout in seconds.
                         </p>
 
                         <ul className="nf-auth-aside-list">
-                            <li><span>✓</span> Verified sellers</li>
-                            <li><span>✓</span> Secure M-Pesa payments</li>
-                            <li><span>✓</span> Nationwide delivery</li>
+                            <li><span aria-hidden="true">✓</span> Verified sellers</li>
+                            <li><span aria-hidden="true">✓</span> Secure M-Pesa payments</li>
+                            <li><span aria-hidden="true">✓</span> Nationwide delivery</li>
                         </ul>
                     </div>
                 </aside>
