@@ -1,3 +1,122 @@
+
+
+/* =========================================================
+   NILA FASHION — CONTACT PAGE (add-on)
+   Reuses .nf-auth-* from Login / Register.
+========================================================= */
+
+.nf-contact-col {
+    padding: 48px 44px;
+}
+
+/* ---- Contact cards ---- */
+.nf-contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 22px 0 8px;
+}
+
+.nf-contact-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #ffffff;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease,
+                transform 0.15s ease, box-shadow 0.15s ease;
+}
+.nf-contact-card:hover {
+    border-color: #172033;
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.nf-contact-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #172033;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.nf-contact-card:hover .nf-contact-icon {
+    background: #172033;
+    color: #ffffff;
+}
+
+.nf-contact-card > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+.nf-contact-card strong {
+    color: #172033;
+    font-size: 14px;
+    font-weight: 800;
+}
+.nf-contact-card span {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+.nf-contact-card small {
+    margin-top: 2px;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ---- Contact aside photo ---- */
+.nf-contact-aside .nf-auth-aside-bg {
+    background-image: url("https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=70");
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .nf-contact-col {
+        padding: 40px 32px;
+    }
+}
+
+@media (max-width: 640px) {
+    .nf-contact-col {
+        padding: 28px 20px;
+    }
+    .nf-contact-options {
+        gap: 10px;
+    }
+    .nf-contact-card {
+        padding: 14px;
+        gap: 12px;
+    }
+    .nf-contact-icon {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+/* Focus ring polish (uses the same token as the other auth pages) */
+.nf-contact-col a:focus-visible {
+    outline: 2px solid #172033;
+    outline-offset: 2px;
+}
+
+
 /* =========================================================
    NILA FASHION — REGISTER PAGE (add-on)
    Builds on top of the Login add-on (reuses .nf-auth-*)
