@@ -1,6 +1,322 @@
 
 
 
+/* =========================================================
+   NILA FASHION — AUTH PAGE REDESIGN (add-on)
+   Safe: uses new class names only.
+========================================================= */
+
+/* --- Page shell: two-column card on desktop --- */
+.nf-auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 0%, rgba(23, 32, 51, 0.06), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(23, 32, 51, 0.05), transparent 50%),
+        #f8fafc;
+}
+
+.nf-auth-card {
+    width: 100%;
+    max-width: 1080px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 30px 80px rgba(15, 23, 42, 0.1);
+}
+
+/* --- Left column --- */
+.nf-auth-form-col {
+    padding: 48px 44px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Brand lockup --- */
+.nf-auth-card .auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #172033;
+    text-decoration: none;
+    margin-bottom: 32px;
+}
+
+.nf-auth-card .auth-brand strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.nf-auth-logo-mark {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #172033;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+/* --- Password toggle wrapper --- */
+.nf-password-wrap {
+    position: relative;
+    display: block;
+}
+
+.nf-password-wrap input {
+    width: 100%;
+    padding-right: 46px;
+}
+
+.nf-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+}
+.nf-password-toggle:hover {
+    background: #f1f5f9;
+    color: #172033;
+}
+
+/* --- Caps lock hint --- */
+.nf-caps-hint {
+    display: block;
+    margin-top: 6px;
+    color: #b45309;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* --- Remember / Forgot row --- */
+.nf-auth-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -4px 0 6px;
+    font-size: 13px;
+}
+
+.nf-auth-remember {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px !important;
+    font-size: 13px;
+    color: #475569;
+    font-weight: 500 !important;
+}
+
+.nf-auth-remember input {
+    width: 16px;
+    height: 16px;
+    accent-color: #172033;
+}
+
+.nf-auth-forgot {
+    color: #172033;
+    font-weight: 600;
+    text-decoration: none;
+}
+.nf-auth-forgot:hover { text-decoration: underline; }
+
+/* --- Big submit button --- */
+.nf-auth-submit {
+    min-height: 48px;
+    margin-top: 4px;
+    border: 0;
+    border-radius: 10px;
+    background: #172033;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+}
+.nf-auth-submit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(23, 32, 51, 0.22);
+}
+.nf-auth-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* --- Trust row under the form --- */
+.nf-auth-trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f1f3;
+}
+.nf-auth-trust > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+}
+.nf-auth-trust svg { color: #0b7a3e; }
+
+/* --- Right brand panel --- */
+.nf-auth-aside {
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: #0f172a;
+    isolation: isolate;
+}
+
+.nf-auth-aside-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=70");
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    transform: scale(1.05);
+}
+
+.nf-auth-aside-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(15, 23, 42, 0.92) 0%,
+        rgba(15, 23, 42, 0.72) 60%,
+        rgba(15, 23, 42, 0.55) 100%
+    );
+    z-index: -1;
+}
+
+.nf-auth-aside-content {
+    position: relative;
+    height: 100%;
+    padding: 56px 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.nf-auth-aside-content .section-eyebrow {
+    color: #cbd5e1;
+}
+
+.nf-auth-aside-content h2 {
+    margin: 12px 0 16px;
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.nf-auth-aside-content > p {
+    max-width: 340px;
+    margin: 0 0 28px;
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.nf-auth-aside-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+}
+.nf-auth-aside-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 600;
+}
+.nf-auth-aside-list li span {
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-size: 12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+    .nf-auth-card {
+        grid-template-columns: 1fr;
+    }
+    .nf-auth-aside {
+        display: none;
+    }
+    .nf-auth-form-col {
+        padding: 40px 32px;
+    }
+}
+
+@media (max-width: 520px) {
+    .nf-auth-page {
+        padding: 20px 12px;
+    }
+    .nf-auth-card {
+        border-radius: 14px;
+    }
+    .nf-auth-form-col {
+        padding: 28px 20px;
+    }
+    .nf-auth-trust {
+        gap: 12px;
+    }
+    .nf-auth-submit {
+        min-height: 46px;
+    }
+}
+
+/* Focus ring polish */
+.nf-auth-card input:focus-visible,
+.nf-auth-submit:focus-visible,
+.nf-password-toggle:focus-visible,
+.nf-auth-forgot:focus-visible,
+.nf-auth-card .auth-brand:focus-visible {
+    outline: 2px solid #172033;
+    outline-offset: 2px;
+}
+
+
 
 /* =========================================================
    NILA FASHION — HOMEPAGE REDESIGN (add-on)
