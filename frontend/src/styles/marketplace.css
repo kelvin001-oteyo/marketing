@@ -1,3 +1,557 @@
+
+
+
+
+/* =========================================================
+   NILA FASHION — HOMEPAGE REDESIGN (add-on)
+   Safe: uses new class names only, does not override
+   existing rules elsewhere in the app.
+========================================================= */
+
+/* --- Utility --- */
+.nf-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* --- Header action links (icon + label) --- */
+.nf-header-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #475569;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+.nf-header-link:hover { color: #172033; }
+
+@media (max-width: 750px) {
+    .nf-header-link span:last-child { display: none; }
+    .nf-header-link { font-size: 18px; }
+}
+
+/* --- Error banner placement --- */
+.nf-error {
+    max-width: 1400px;
+    margin: 0 auto 0;
+    padding: 14px 28px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.nf-hero {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    color: #ffffff;
+    background: #0f172a;
+}
+
+.nf-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=70");
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.04);
+    z-index: -2;
+}
+
+.nf-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(115deg,
+            rgba(15, 23, 42, 0.94) 0%,
+            rgba(15, 23, 42, 0.78) 45%,
+            rgba(15, 23, 42, 0.55) 100%);
+    z-index: -1;
+}
+
+.nf-hero-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 90px 28px 100px;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 50px;
+}
+
+/* Recolor existing hero text blocks for the dark hero */
+.nf-hero .marketplace-hero-content { max-width: 650px; }
+
+.nf-hero .hero-eyebrow {
+    color: #cbd5e1;
+}
+
+.nf-hero h1 {
+    margin: 16px 0 20px;
+    color: #ffffff;
+    font-size: clamp(42px, 5vw, 70px);
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+}
+
+.nf-hero h1 span { color: #cbd5e1; }
+
+.nf-hero .marketplace-hero-content > p {
+    max-width: 570px;
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.nf-hero .hero-primary-btn {
+    background: #ffffff;
+    color: #172033;
+}
+.nf-hero .hero-primary-btn:hover {
+    box-shadow: 0 12px 28px rgba(255, 255, 255, 0.18);
+}
+
+.nf-hero .hero-secondary-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+}
+.nf-hero .hero-secondary-btn:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.nf-hero .hero-trust {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+.nf-hero .hero-trust strong { color: #ffffff; }
+.nf-hero .hero-trust span { color: #cbd5e1; }
+.nf-hero .hero-trust div:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Soften hero card shadows against the photo */
+.nf-hero .hero-fashion-card {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+}
+.nf-hero .hero-floating-card {
+    background: rgba(15, 23, 42, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+}
+.nf-hero .hero-floating-card span { color: #cbd5e1; }
+.nf-hero .hero-floating-card strong { color: #ffffff; }
+.nf-hero .hero-floating-card small { color: #cbd5e1; }
+
+/* =========================================================
+   TRUST STRIP — icon sizing polish
+========================================================= */
+
+.nf-trust-strip .trust-icon {
+    background: #f1f5f9;
+    color: #172033;
+}
+
+/* =========================================================
+   CATEGORIES — new overlay tile design
+========================================================= */
+
+.nf-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.nf-category-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 16px;
+    text-decoration: none;
+    color: inherit;
+    background: #172033;
+    aspect-ratio: 4 / 5;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.nf-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.nf-category-image {
+    position: absolute;
+    inset: 0;
+}
+.nf-category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.nf-category-card:hover .nf-category-image img {
+    transform: scale(1.06);
+}
+
+.nf-category-image > span:first-child:not(.nf-category-overlay) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 52px;
+    font-weight: 800;
+}
+
+.nf-category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.92) 0%,
+        rgba(15, 23, 42, 0.35) 45%,
+        rgba(15, 23, 42, 0) 75%
+    );
+}
+
+.nf-category-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 18px;
+    color: #ffffff;
+}
+.nf-category-body h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+.nf-category-body > span {
+    display: inline-block;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   PRODUCT CARDS — wishlist + polish
+========================================================= */
+
+.nf-product-card {
+    position: relative;
+}
+
+.nf-wishlist-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    color: #172033;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.nf-product-card:hover .nf-wishlist-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+.nf-wishlist-btn:hover { color: #e11d48; }
+
+@media (hover: none) {
+    .nf-wishlist-btn { opacity: 1; transform: none; }
+}
+
+/* =========================================================
+   DEALS SECTION — keep same but tighten spacing
+========================================================= */
+
+.nf-deals-section {
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* =========================================================
+   SELLER CTA — image background
+========================================================= */
+
+.nf-seller-cta {
+    position: relative;
+    max-width: 1344px;
+    margin: 30px auto 70px;
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    isolation: isolate;
+    color: #ffffff;
+    background: #172033;
+}
+
+.nf-seller-cta-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=70");
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    transform: scale(1.05);
+}
+
+.nf-seller-cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        100deg,
+        rgba(15, 23, 42, 0.94) 0%,
+        rgba(15, 23, 42, 0.82) 55%,
+        rgba(15, 23, 42, 0.62) 100%
+    );
+    z-index: -1;
+}
+
+.nf-seller-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 46px;
+}
+
+.nf-seller-cta .section-eyebrow { color: #cbd5e1; }
+.nf-seller-cta h2 {
+    margin: 8px 0;
+    font-size: 32px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+.nf-seller-cta p {
+    max-width: 600px;
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 13px;
+    line-height: 1.7;
+}
+.nf-seller-cta .seller-cta-button {
+    background: #ffffff;
+    color: #172033;
+}
+.nf-seller-cta .seller-cta-button:hover {
+    background: #e2e8f0;
+}
+
+/* =========================================================
+   M-PESA SECTION — subtle green tint
+========================================================= */
+
+.nf-mpesa-section {
+    position: relative;
+    max-width: 1240px;
+    margin: 70px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    isolation: isolate;
+    background: #f1faf3;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+}
+
+.nf-mpesa-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 100% 0%, rgba(11, 122, 62, 0.14), transparent 55%),
+        radial-gradient(circle at 0% 100%, rgba(11, 122, 62, 0.08), transparent 50%);
+    z-index: -1;
+}
+
+.nf-mpesa-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 48px;
+}
+
+.nf-mpesa-section .mpesa-home-content h2 {
+    margin: 8px 0 14px;
+    color: #0b3d20;
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+}
+.nf-mpesa-section .mpesa-home-content p {
+    color: #3f6a50;
+}
+.nf-mpesa-section .section-eyebrow {
+    color: #0b7a3e;
+}
+.nf-mpesa-section .mpesa-home-button {
+    background: #0b7a3e;
+    color: #ffffff;
+}
+.nf-mpesa-section .mpesa-home-button:hover {
+    background: #095f30;
+}
+.nf-mpesa-section .mpesa-badge {
+    background: #0b7a3e;
+    color: #ffffff;
+}
+.nf-mpesa-section .mpesa-home-card {
+    background: #ffffff;
+    border: 1px solid rgba(11, 122, 62, 0.14);
+    box-shadow: 0 14px 40px rgba(11, 122, 62, 0.1);
+}
+
+/* =========================================================
+   RESPONSIVE — homepage-specific overrides
+========================================================= */
+
+@media (max-width: 1100px) {
+    .nf-hero-inner {
+        grid-template-columns: 1fr;
+        padding: 70px 28px 80px;
+    }
+    .nf-hero .marketplace-hero-visual {
+        max-width: 650px;
+        width: 100%;
+        margin: 0 auto;
+        min-height: 420px;
+    }
+}
+
+@media (max-width: 900px) {
+    .nf-category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    }
+}
+
+@media (max-width: 750px) {
+    .nf-hero-inner {
+        padding: 55px 20px 65px;
+    }
+    .nf-hero h1 {
+        font-size: clamp(34px, 8vw, 46px);
+    }
+
+    .nf-seller-cta {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .nf-seller-cta-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 24px;
+    }
+
+    .nf-mpesa-section {
+        margin: 45px 20px;
+    }
+    .nf-mpesa-inner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 28px 22px;
+        gap: 24px;
+    }
+    .nf-mpesa-section .mpesa-home-content h2 {
+        font-size: 26px;
+    }
+    .nf-mpesa-section .mpesa-home-card {
+        width: auto;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .nf-category-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .nf-category-card {
+        aspect-ratio: 3 / 4;
+    }
+    .nf-category-body { padding: 14px; }
+    .nf-category-body h3 { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+    .nf-hero-inner {
+        padding: 45px 16px 55px;
+    }
+    .nf-hero .hero-trust {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+    .nf-hero .hero-trust div:not(:last-child) {
+        border-right: 0;
+        padding-right: 0;
+    }
+    .nf-category-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* =========================================================
+   FIX: hero polish block was trapped inside
+   @media (max-width: 480px) in the original file.
+   The rules below re-apply them at every breakpoint
+   so they don't get lost.
+========================================================= */
+
+.hero-primary-btn,
+.hero-secondary-btn {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-trust {
+    padding-top: 22px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.fashion-placeholder {
+    background: linear-gradient(135deg, #172033 0%, #334155 100%);
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.hero-fashion-card {
+    transition: transform 0.25s ease;
+}
+.hero-fashion-card:hover {
+    transform: scale(1.03) rotate(0deg) !important;
+}
+
+.hero-floating-card {
+    animation: heroFloatIn 0.6s ease both;
+}
+@keyframes heroFloatIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
 /* =========================================================
    NILA FASHION — HOMEPAGE REDESIGN (add-on)
    Safe: uses new class names only, does not override
